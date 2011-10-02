@@ -1,0 +1,32 @@
+/* Global standard unit of measurement */
+$measure1: 25px;
+
+/* Body/default style */
+$body_color: #453e36;
+$body_bold_color: #5BAF4C;
+$body_background_color: green;
+$body_background: $body_background_color url("http://download.unity3d.com/images/top-menu/background_gradient.png") repeat-x top left;
+$body_font: Helvetica, Arial, sans-serif;
+$body_font_size: 13px;
+$body_font_smaller_size: 90%;
+$error_color: #c00;
+$note_color: #aaa;
+
+
+/* Forms */
+$input_border: 1px solid #888;
+$field_padding: 3px;
+$field_error_background: #ffd;
+
+
+
+
+$body_bold_color: #5BAF4C;
+$field_padding: 3px;
+$body_font: Helvetica, Arial, sans-serif;
+$body_font_size: 13px;
+$input_border: 1px solid #888;
+
+/*Buttons*/
+$grandient_from:#4C7CAF;
+$grandient_to:rgba(84, 170, 237,0.8);

@@ -1,0 +1,59 @@
+header#main nav ul,
+#page_footer nav ul{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+header#main nav ul li,
+footer#page_footer nav ul li{
+	padding:0;
+	margin: 0 20px 0 0;
+	display:inline;
+}
+
+#header {
+    height: 110px;
+    background-color: #ccc;
+    margin-bottom: 10px;
+    padding-left: 15px;
+
+
+    #contact-button{
+        float:right;
+        padding: 15px;
+
+        a:link {
+            background: url("/assets/contact_icon_dual.gif") no-repeat scroll left top transparent;
+            display:block;
+            height:29px;
+            text-indent: -1000em;
+            width: 86px;
+
+            &:hover {
+                background-position: left bottom;
+                 border: medium none;
+            }
+
+        }
+
+
+    }
+    nav {
+        float: left;
+        clear: both;
+        ul {
+            list-style: none;
+	        margin: 0;
+	        padding: 0;
+
+	        li{
+	            padding:0;
+	            margin: 0 20px 0 0;
+	            display:inline;
+
+	        }
+	    }
+    }
+
+
+}
