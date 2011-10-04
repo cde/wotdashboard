@@ -1,2 +1,13 @@
 module ApplicationHelper
+  def show_flash(name, msg)
+    if name == "alert"
+      name = "error"
+    elsif name == "notice"
+      name = "info"
+    end
+    
+    content_tag :div, :class => 'alert-message #{name}', :'data-alert' => 'alert' do
+      content_tag(:a, "x", :href => "#", :class => 'close') + content_tag(:p, msg)
+    end
+  end
 end

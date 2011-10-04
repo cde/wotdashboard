@@ -1,0 +1,21 @@
+!!! 5
+%html
+	%head
+		%title Login Dashboard
+		= stylesheet_link_tag    "application"
+		= javascript_include_tag "application"
+		= csrf_meta_tags
+	%body
+		%div.container
+			%div.content
+				%div#hero-unit
+					%h1 WoT Dashboard
+				%section#about
+					.page-header
+						%h1 Inicio <small>insert your credentials</small>
+					.row
+						%div.span14.columns
+						- flash.each do |name, msg|
+							= show_flash name, msg
+						= yield
+				= render :partial => 'shared/footer'
