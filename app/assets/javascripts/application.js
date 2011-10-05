@@ -8,3 +8,4 @@
 //= require jquery_ujs
 //= require_tree .
 //= require bootstrap-alerts-1.3.0
+//= require bootstrap-dropdown-1.3.0
