@@ -3,11 +3,10 @@
 		%div{:class => 'container-fluid'}
 			%a{:class => 'brand', :href => '#'} WoT Dashboard
 			%ul{:class => 'nav'}
-				%li{:class => 'active'}
-					%a{:href => '#'} Home
+				%li{:class => check_item_active(request.url, '')}= link_to 'Home', root_path
 				- if current_user.admin
-					%li= link_to 'Users', '#'
-				%li= link_to 'Add files', '#'
+					%li{:class => check_item_active(request.url, 'users')}= link_to 'Users', '#'
+				%li{:class => check_item_active(request.url, 'funnels')}= link_to 'Add files', funnels_path
 			%p
 			%ul{:class => 'nav secondary-nav'}
 				%li{:class => 'dropdown'}

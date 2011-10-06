@@ -1,0 +1,35 @@
+%div.sidebar
+	%div.well
+		%h5 Related Reports
+		%ul
+			%li
+				%a{:href=> "#"} Report 3
+			%li
+				%a{:href=> "#"} Report 14
+			%li
+				%a{:href=> "#"} Report 2
+%div.content
+	%div.page-header
+		%h2 
+			Add Files
+			%small Here you can add files data in the app
+	%div.row
+		%div.span12
+			= form_for :funnels, {:url => funnels_path} do |f|
+				%fieldset
+					%legend You can add CSV or XLS formats
+					%div.clearfix
+						%label{:for => 'file'} Data file
+						%div.input
+							= f.file_field :file, :class => 'xInput'
+					%div.well{:style => 'padding: 14px 19px;text-align:center;'}
+						= f.submit 'Add', :class => 'btn primary'
+	%div.row
+		%div.span16
+			%h4 
+				Recomendations
+				%span.label.important Important
+			%ul
+				%li You have to verify that you have the correct format
+				%li Remove blank lines between corrects lines with data
+				%li if you have any questions, consult with a support agent
