@@ -1,7 +1,9 @@
 Wotdashboard::Application.routes.draw do
 
-  #get "funnels/index"
-  resources :funnels
+  match "funnels" => "funnels#index", :as => :funnels
+  match "add_files" => "funnels#add_files", :as => :funnels_add_files
+  match "process/:data_file" => "funnels#process_file", :as => :funnels_process_file
+  #resources :funnels
 
   devise_for :users, :controllers => {:sessions => 'devise/sessions'}, :skip => [:sessions] do
       get 'login' => 'devise/sessions#new', :as => :new_user_session

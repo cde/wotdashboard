@@ -3,9 +3,9 @@ class CreateFunnels < ActiveRecord::Migration
     create_table :funnels do |t|
       t.string :type
       t.integer :confirmed
-      t.integer :logged_in
-      t.integer :first_upgrade
-      t.integer :tank_purchase
+      t.float :logged_in
+      t.float :first_upgrade
+      t.float :tank_purchase
       t.date :start_date
       t.date :end_date
 

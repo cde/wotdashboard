@@ -9,13 +9,15 @@
 			%li
 				%a{:href=> "#"} Report 2
 %div.content
+	- flash.each do |name, msg|
+		= show_flash name, msg
 	%div.page-header
 		%h2 
 			Add Files
 			%small Here you can add files data in the app
 	%div.row
 		%div.span12
-			= form_for :funnels, {:url => funnels_path} do |f|
+			= form_for :funnels, {:url => funnels_add_files_path} do |f|
 				%fieldset
 					%legend You can add CSV or XLS formats
 					%div.clearfix

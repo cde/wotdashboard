@@ -39,6 +39,9 @@ end
 gem "haml", ">= 3.1.2"
 gem "haml-rails", ">= 0.3.4", :group => :development
 gem "rspec-rails", ">= 2.6.1", :group => [:development, :test]
+gem "pry"
+gem "csv-mapper"
+gem 'carrierwave'
 
 group :test do
 	gem "factory_girl_rails", ">= 1.2.0"

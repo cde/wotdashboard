@@ -15,20 +15,30 @@
 			%li
 				%a{:href=> "#"} Report 2
 %div.content
-	%div.well
-		%div.row
-			%div.span10
-				%h2 Reporte 1
-				%img{:src => 'http://dummyimage.com/550x320', :alt => 'Space for chart'}
-			%div.span6
-				%h2 Choose a graphic
-				%div.input
-					%select{:class => "medium", :multiple => 'multiple', :name => 'graphic', :id => 'graphic'}
-						%option{:value => "1"} Graphic 1
-						%option{:value => "2"} Graphic 2
-						%option{:value => "3"} Graphic 3
-						%option{:value => "4"} Graphic 4
+	- flash.each do |name, msg|
+		= show_flash name, msg
+	%div.page-header
+		%h2 
+			Dashboard
+			%small View chart
+	%ul.breadcrumb
+		%li
+			%a{:href => "#"} Dashboard
+			%span.divider /
+		%li.active
+			%a{:href => "#"} Reporte 1
+	%div.row
+		%div.span10
+			%img{:src => 'http://dummyimage.com/550x320', :alt => 'Space for chart'}
+		%div.span3
+			%h4 Choose a graphic
+			%div.input
+				%select{:class => "medium", :multiple => 'multiple', :name => 'graphic', :id => 'graphic'}
+					%option{:value => "1"} Graphic 1
+					%option{:value => "2"} Graphic 2
+					%option{:value => "3"} Graphic 3
+					%option{:value => "4"} Graphic 4
 	%div.row
 		%div.span16
-			%h2 Description
+			%h2 Reporte 1
 			%p Example description Example description Example description Example description Example description Example description Example description
