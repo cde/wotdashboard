@@ -6,7 +6,7 @@ module ApplicationHelper
     elsif name == "notice"
       name = "info"
     end
-    
+
     content_tag :div, :class => "alert-message #{name}", :'data-alert' => 'alert' do
       content_tag(:a, "x", :href => "#", :class => 'close') + content_tag(:p, msg)
     end
@@ -18,4 +18,10 @@ module ApplicationHelper
       'active'
     end
   end
+
+
+  def number_format
+    number.str
+  end
+
 end

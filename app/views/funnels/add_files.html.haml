@@ -12,7 +12,7 @@
 	- flash.each do |name, msg|
 		= show_flash name, msg
 	%div.page-header
-		%h2 
+		%h2
 			Add Files
 			%small Preview
 	%div.row
@@ -22,43 +22,46 @@
 				%thead
 					%tr
 						%th #
-						%th Start Date
-						%th End Date
+						-#%th Start Date
+						-#%th End Date
 						%th Confirmed
 						%th Logged In
-						%th First Upgarde
+						%th First Battle
+						%th First Upgrade
 						%th Tank Purchase
-					- @preview[:with].each do |row|
+					- @preview[:ads].each do |row|
 						%tr
-							%td= row[:number]
-							%td= row[:start_date]
-							%td= row[:end_date]
-							%td= row[:confirmed]
-							%td= row[:logged_in]
-							%td= row[:first_upgrade]
-							%td= row[:tank_purchase]
-			%h4 Without Promo Actions/Ads
+							%td= row[:week]
+							-#%td= row[:start_date]
+							-#%td= row[:end_date]
+							%td= number_with_delimiter row[:confirmed]
+							%td= number_with_delimiter row[:logged_in]
+							%td= number_with_delimiter row[:first_battle]
+							%td= number_with_delimiter row[:first_upgrade]
+							%td= number_with_delimiter row[:tank_purchase]
+			%h4 Direct Traffic
 			%table
 				%thead
 					%tr
-						%th #
-						%th Start Date
-						%th End Date
+						%th Week
+						-#%th Start Date
+						-#%th End Date
 						%th Confirmed
 						%th Logged In
-						%th First Upgarde
+						%th First Battle
+						%th First Upgrade
 						%th Tank Purchase
-					- @preview[:without].each do |row|
+					- @preview[:direct].each do |row|
 						%tr
-							%td= row[:number]
-							%td= row[:start_date]
-							%td= row[:end_date]
-							%td= row[:confirmed]
-							%td= row[:logged_in]
-							%td= row[:first_upgrade]
-							%td= row[:tank_purchase]
+							%td.week= row[:week]
+							-#%td= row[:start_date]
+							-#%td= row[:end_date]
+							%td= number_with_delimiter(row[:confirmed])
+							%td= number_with_delimiter(row[:logged_in])
+							%td= number_with_delimiter(row[:first_battle])
+							%td= number_with_delimiter(row[:first_upgrade])
+							%td= number_with_delimiter(row[:tank_purchase])
 			%div.well{:style => 'padding: 14px 19px;text-align:center;'}
 				%div.action
 					= link_to 'Cancel', funnels_path, :class => 'btn cancel'
 					= link_to 'Ok', funnels_process_file_path(@data_file), :class => 'btn primary'
-						
