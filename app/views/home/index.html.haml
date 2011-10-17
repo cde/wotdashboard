@@ -18,7 +18,7 @@
 	- flash.each do |name, msg|
 		= show_flash name, msg
 	%div.page-header
-		%h2 
+		%h2
 			Dashboard
 			%small View chart
 	%ul.breadcrumb
@@ -26,18 +26,22 @@
 			%a{:href => "#"} Dashboard
 			%span.divider /
 		%li.active
-			%a{:href => "#"} Reporte 1
+			%a{:href => "#"} tmp
 	%div.row
 		%div.span10
-			%img{:src => 'http://dummyimage.com/550x320', :alt => 'Space for chart'}
+			%div{:style => "width:550px;height:320px"}
 		%div.span3
 			%h4 Choose a graphic
 			%div.input
 				%select{:class => "medium", :multiple => 'multiple', :name => 'graphic', :id => 'graphic'}
-					%option{:value => "1"} Graphic 1
-					%option{:value => "2"} Graphic 2
-					%option{:value => "3"} Graphic 3
-					%option{:value => "4"} Graphic 4
+					%option{:value => "1"} Lines
+					%option{:value => "2"} Funnel
+	%div.row
+		%div.span1 To
+		%div.span5= text_field_tag 'begin', date_formated(-15)
+		%div.span1 From
+		%div.span5= text_field_tag 'end', date_formated
+		%div.span4= link_to "Generate chart", "#", :class => 'btn'
 	%div.row
 		%div.span16
 			%h2 Reporte 1
