@@ -2,11 +2,14 @@
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
 
+=begin
 if User.all.empty?
   puts 'SETTING UP DEFAULT USER LOGIN'
   user = User.create! :username => 'jeremy', :email => 'jeremy@test.com', :password => 'password', :password_confirmation => 'password'
   puts 'New user created: ' << user.name
 end
+=end
+
 
 
 if Funnel.all.empty? && Rails.env == 'development'
