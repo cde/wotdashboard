@@ -29,7 +29,7 @@ gem 'twitter-bootstrap-rails', '~> 0.0.5'
 # gem 'capistrano'
 
 # To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
+gem 'ruby-debug19', :require => 'ruby-debug'
 
 # install a Javascript runtime for linux
 if HOST_OS =~ /linux/i

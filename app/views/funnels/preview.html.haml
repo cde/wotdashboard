@@ -1,0 +1,25 @@
+%div.sidebar
+	%div.well
+		%h5 Related Reports
+		%ul
+			%li
+				%a{:href=> "#"} Report 3
+			%li
+				%a{:href=> "#"} Report 14
+			%li
+				%a{:href=> "#"} Report 2
+%div.content
+	- flash.each do |name, msg|
+		= show_flash name, msg
+	%div.page-header
+		%h2
+			Add Files
+			%small Preview
+	%div.row
+		%div.span12
+			= render :partial=> 'direct_funnels', :locals => {:direct_funnels => @funnels[:direct]}
+			= render :partial=> 'ads_funnels', :locals => {:ads_funnels => @funnels[:ads]}
+			%div.well{:style => 'padding: 14px 19px;text-align:center;'}
+				%div.action
+					= link_to 'Cancel', funnels_path, :class => 'btn cancel'
+					= link_to 'Ok', funnels_process_file_path(@data_file), :class => 'btn primary'

@@ -1,0 +1,22 @@
+%h4 Direct Traffic
+%table
+    %thead
+        %tr
+            %th Week
+            -#%th Start Date
+            -#%th End Date
+            %th Confirmed
+            %th Logged In
+            %th First Battle
+            %th First Upgrade
+            %th Tank Purchase
+        - direct_funnels.each do |row|
+            %tr
+                %td.week= row[:week]
+                -#%td= row[:start_date]
+                -#%td= row[:end_date]
+                %td= number_with_delimiter(row[:confirmed])
+                %td= number_with_delimiter(row[:logged_in])
+                %td= number_with_delimiter(row[:first_battle])
+                %td= number_with_delimiter(row[:first_upgrade])
+                %td= number_with_delimiter(row[:tank_purchase])

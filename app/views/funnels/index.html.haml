@@ -12,12 +12,12 @@
 	- flash.each do |name, msg|
 		= show_flash name, msg
 	%div.page-header
-		%h2 
+		%h2
 			Add Files
 			%small Here you can add files data in the app
 	%div.row
 		%div.span12
-			= form_for :funnels, {:url => funnels_add_files_path} do |f|
+			= form_for :funnels, {:url => funnels_preview_path} do |f|
 				%fieldset
 					%legend You can add CSV or XLS formats
 					%div.clearfix
@@ -28,7 +28,7 @@
 						= f.submit 'Add', :class => 'btn primary'
 	%div.row
 		%div.span16
-			%h4 
+			%h4
 				Recomendations
 				%span.label.important Important
 			%ul

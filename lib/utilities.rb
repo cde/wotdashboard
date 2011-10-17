@@ -3,4 +3,5 @@ class String
     number = self.gsub(" %", "").gsub(",", ".")
     number.to_f
   end
+
 end

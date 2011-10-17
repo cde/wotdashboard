@@ -1,7 +1,7 @@
 class CreateFunnels < ActiveRecord::Migration
   def change
     create_table :funnels do |t|
-      t.string :type
+      t.string :traffic_type
       t.integer :confirmed
       t.integer :logged_in
       t.integer :first_battle

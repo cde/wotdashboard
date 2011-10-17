@@ -1,7 +1,7 @@
 Wotdashboard::Application.routes.draw do
 
   match "funnels" => "funnels#index", :as => :funnels
-  match "add_files" => "funnels#add_files", :as => :funnels_add_files
+  match "preview" => "funnels#preview", :as => :funnels_preview
   match "process/:data_file" => "funnels#process_file", :as => :funnels_process_file
   #resources :funnels
 

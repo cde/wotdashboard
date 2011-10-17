@@ -1,9 +1,3 @@
 class Funnel < ActiveRecord::Base
-
-  attr_reader :logged_in_percentage
-
-  def initialize(logged_in_percentage)
-    @logged_in_percentage = logged_in_percentage
-
-  end
+  attr_accessible :traffic_type,  :confirmed, :logged_in, :first_battle, :first_upgrade, :tank_purchase, :start_date, :end_date
 end

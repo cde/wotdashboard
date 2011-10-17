@@ -14,11 +14,12 @@
 ActiveRecord::Schema.define(:version => 20111002054835) do
 
   create_table "funnels", :force => true do |t|
-    t.string   "type"
+    t.string   "traffic_type"
     t.integer  "confirmed"
-    t.float    "logged_in"
-    t.float    "first_upgrade"
-    t.float    "tank_purchase"
+    t.integer  "logged_in"
+    t.integer  "first_battle"
+    t.integer  "first_upgrade"
+    t.integer  "tank_purchase"
     t.date     "start_date"
     t.date     "end_date"
     t.datetime "created_at"

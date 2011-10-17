@@ -1,0 +1,54 @@
+/*this is an ugly solution. But I couldn't figure out how to overwrite Html styling from bootstrap*/
+/*login & application are separate layout*/
+/*TODO: create style ship just for login (sessions) layout*/
+
+html.sessions{
+    background: #090807
+}
+body.sessions{
+    background: #090807 url("../assets/page-bg.jpg") no-repeat 50% 0;
+    color: #ccc;
+    padding-top: 30px;
+
+
+    form label{
+        color: #CF8F00
+    }
+
+    section#about{
+        padding: 200px 120px;
+
+        .row {
+            margin-left: 0px;
+        }
+    }
+
+    div#hero-unit{
+        h1{font-size: 24px;}
+    }
+
+    .footer.sessions{
+        background-color: transparent;
+        border: none;
+
+        .btn.primary{
+            background-color:  #CF8F00;
+
+        }
+    }
+}
+
+form .instructions{
+    padding: 16px 19px;
+    .btn.primary{
+        background-color:  #CF8F00;
+        border-color: #CF8F00 #CF8F00 #C3F00;
+        background-image: -moz-linear-gradient(center top , #F7D9A7, #CF8F00);
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #CF8F00));
+
+    }
+    a{color:  #CF8F00;}
+
+}
+
+
