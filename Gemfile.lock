@@ -213,6 +213,7 @@ GEM
       json_pure
       rubyzip
     sexp_processor (3.0.7)
+    shoulda (2.11.3)
     slop (2.1.0)
     sprockets (2.0.2)
       hike (~> 1.2)
@@ -268,6 +269,7 @@ DEPENDENCIES
   rspec-rails (>= 2.6.1)
   ruby-debug19
   sass-rails (~> 3.1.0)
+  shoulda
   sqlite3
   twitter-bootstrap-rails (~> 0.0.5)
   uglifier

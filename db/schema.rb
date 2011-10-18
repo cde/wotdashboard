@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111002054835) do
+ActiveRecord::Schema.define(:version => 20111017221813) do
 
   create_table "funnels", :force => true do |t|
     t.string   "traffic_type"
@@ -22,6 +22,25 @@ ActiveRecord::Schema.define(:version => 20111002054835) do
     t.integer  "tank_purchase"
     t.date     "start_date"
     t.date     "end_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "graphics", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "chart_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "reports", :force => true do |t|
+    t.date     "starts_date"
+    t.date     "ends_date"
+    t.string   "title"
+    t.text     "note"
+    t.integer  "user_id"
+    t.integer  "graphic_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
