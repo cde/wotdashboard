@@ -30,7 +30,6 @@ class FunnelsController < ApplicationController
     end
   end
 
-
   def process_file
     unless params[:data_file].nil?
       begin
@@ -53,5 +52,10 @@ class FunnelsController < ApplicationController
     end
   end
 
-
+  def get_data
+    @funnel_data = Funnel.select("id, traffic_type, confirmed").where(:start_date => (params[:start].to_date)..(params[:end].to_date), :end_date => (params[:start].to_date)..(params[:end].to_date))
+    respond_to do |format|
+      format.json { render :json => @funnel_data }
+    end
+  end
 end

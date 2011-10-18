@@ -19,6 +19,7 @@ group :assets do
   gem 'uglifier'
 end
 
+gem 'rack', '1.3.3'
 gem 'jquery-rails'
 gem 'twitter-bootstrap-rails', '~> 0.0.5'
 
