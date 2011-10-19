@@ -20,29 +20,28 @@
 	%div.page-header
 		%h2
 			Dashboard
-			%small View chart
+			%small Generate chart
 	%ul.breadcrumb
 		%li
 			%a{:href => "#"} Dashboard
 			%span.divider /
 		%li.active
 			%a{:href => "#"} tmp
-	%div.row
-		%div.span10
-			%div{:style => "width:550px;height:320px"}
-		%div.span3
-			%h4 Choose a graphic
-			%div.input
-				%select{:class => "medium", :multiple => 'multiple', :name => 'graphic', :id => 'graphic'}
-					%option{:value => "1"} Lines
-					%option{:value => "2"} Funnel
-	%div.row
+	%div.row{:style => 'display:inline'}
 		%div.span1 To
 		%div.span5= text_field_tag 'begin', date_formated(-15)
 		%div.span1 From
 		%div.span5= text_field_tag 'end', date_formated
-		%div.span4= link_to "Generate chart", "#", :class => 'btn'
+		%div.span4= link_to "Generate chart", "#", :class => 'btn', :id => 'generate'
 	%div.row
 		%div.span16
-			%h2 Reporte 1
-			%p Example description Example description Example description Example description Example description Example description Example description
+			%div{:style => "width:100%;height:320px", :id => 'chart'}
+	%div.row
+		%div.span16
+			%h4 Choose a graphic
+	%div.row
+		%div.span16
+			%ul.pills
+				%li.active= link_to 'Lines', '#'
+				%li= link_to 'Funnels', '#'
+				%li= link_to 'Bars', '#'

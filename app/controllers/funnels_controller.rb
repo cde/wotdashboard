@@ -53,7 +53,7 @@ class FunnelsController < ApplicationController
   end
 
   def get_data
-    @funnel_data = Funnel.select("id, traffic_type, confirmed").where(:start_date => (params[:start].to_date)..(params[:end].to_date), :end_date => (params[:start].to_date)..(params[:end].to_date))
+    @funnel_data = Funnel.select("id, traffic_type, confirmed, logged_in, first_battle, first_upgrade, tank_purchase, start_date, end_date").where(:start_date => (params[:start].to_date)..(params[:end].to_date), :end_date => (params[:start].to_date)..(params[:end].to_date))
     respond_to do |format|
       format.json { render :json => @funnel_data }
     end
