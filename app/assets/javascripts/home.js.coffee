@@ -4,6 +4,7 @@
 #= require ./picker/datepicker
 #= require ./graphic/highcharts
 #= require ./graphic/modules/exporting
+#= require ./graphic/modules/funnel
 $ ->
 	format_data = (data)->
 		parameters =
@@ -27,12 +28,68 @@ $ ->
 				parameters.categories.push(short_month_data[new_date.getMonth()] + ' ' + new_date.getDate())
 				date_range = row.start_date
 		parameters
-			
-	generate_graph = (parameters, container, title)->
+		
+	generate_graph = (parameters, container, title, type_graphic)->
+		if type_graphic == 'funnel'
+		  generate_graph_funnel(parameters, container, title)
+		else
+		  generate_graph_normal(parameters, container, title, type_graphic)
+		
+	generate_graph_funnel = (parameters, container, title)->
 		chart = new Highcharts.Chart
 			chart:
 				renderTo: container
-				defaultSeriesType: 'line'
+				defaultSeriesType: 'funnel'
+				margin: [50, 10, 60, 170]
+				borderWidth: 1
+			title: 
+				text: title
+				x: -20 #center
+			plotArea:
+				shadow: null
+				borderWidth: null
+				backgroundColor: null
+			tooltip: 
+				formatter: ()-> 
+					'<b>'+ this.series.name + '</b><br/>' + this.x + ': ' + this.y
+			plotOptions:
+				series:
+					dataLabels:
+						align: 'left'
+						x: -300
+						enabled: true
+						formatter: ()->
+							'<b>'+ this.point.name +'</b> ('+ Highcharts.numberFormat(this.point.y, 0) +')'
+			legend:
+				enabled: false
+			series: [
+				name: 'help'
+				data: [ ['opcion1', 1233], ['downloads', 32333], ['request', 34444]]
+				]
+			credits:
+				enabled: false
+			exporting:
+				enabled: false
+			
+	generate_graph_normal = (parameters, container, title, type_graphic)->
+		plot_options = {}
+		stack_labels = {}
+		if type_graphic == 'column'
+			plot_options = 
+				column: 
+					stacking: 'normal'
+					dataLabels:
+						enabled: true
+						color: 'white'
+			stack_labels: 
+				enabled: true
+				style: 
+					fontWeight: 'bold'
+					color: 'gray'
+		chart = new Highcharts.Chart
+			chart:
+				renderTo: container
+				defaultSeriesType: type_graphic
 				marginRight: 230
 				marginBottom: 45
 			title: 
@@ -47,9 +104,11 @@ $ ->
 				title:
 					text: 'Users'
 				plotLines: [ {value: 0, width: 1, color: '#808080'} ]
+				stackLabels: stack_labels
 			tooltip: 
 				formatter: ()-> 
 					'<b>'+ this.series.name + '</b><br/>' + this.x + ': ' + this.y
+			plotOptions: plot_options
 			legend:
 				layout: 'vertical'
 				align: 'right'
@@ -63,22 +122,33 @@ $ ->
 			exporting:
 				enabled: false
 	
-	get_data = ()->
+	get_data = (type_graphic)->
 		$.getJSON '/funnels/'+ $('#begin').val()+'/'+$('#end').val()+'/Direct.json', (data)->
 			parameters = format_data(data)
-			generate_graph parameters, 'chart1', 'Direct'
+			generate_graph(parameters, 'chart1', 'Direct', type_graphic)
 		$.getJSON '/funnels/'+ $('#begin').val()+'/'+$('#end').val()+'/Ads.json', (data)->
 			parameters = format_data(data)
-			generate_graph parameters, 'chart2', 'Ads'
+			generate_graph(parameters, 'chart2', 'Ads', type_graphic)
 			
-	get_data()
+	get_data('line')
+	
+	get_graphic_type = ->
+		if $('ul.pills li.active a').html() == 'Lines'
+			return 'line'
+		if $('ul.pills li.active a').html() == 'Bars'
+		  return 'column'
+		if $('ul.pills li.active a').html() == 'Funnels'
+			return 'funnel'
+	
 	$('ul.pills li a').click (event)->
 		event.preventDefault()
 		$('ul.pills li').removeClass('active')
 		$(this).parent('li').addClass('active')
+		get_data(get_graphic_type())
+		
 	$('#generate').click (event)->
 		event.preventDefault()
-		get_data()
+		get_data(get_graphic_type())
 	
 	$('#begin').DatePicker
 		format:'Y-m-d'
