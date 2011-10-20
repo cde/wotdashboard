@@ -1,49 +1,42 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+#= require ./picker/datepicker
+#= require ./graphic/highcharts
+#= require ./graphic/modules/exporting
 $ ->
 	format_data = (data)->
 		parameters =
 			categories: []
-			series: [ {name: 'Direct - confirmed', data: []},
-								{name: 'Direct - logged_in', data: []},
-								{name: 'Direct - first_battle', data: []},
-								{name: 'Direct - first_upgrade', data: []},
-								{name: 'Direct - tank_purchase', data: []},
-								{name: 'Ads - confirmed', data: []},
-								{name: 'Ads - logged_in', data: []},
-								{name: 'Ads - first_battle', data: []},
-								{name: 'Ads - first_upgrade', data: []},
-								{name: 'Ads - tank_purchase', data: []} ]
+			series: [ {name: 'confirmed', data: []},
+								{name: 'logged_in', data: []},
+								{name: 'first_battle', data: []},
+								{name: 'first_upgrade', data: []},
+								{name: 'tank_purchase', data: []} ]
 		date_range = ''
 		for row in data
-			if row.traffic_type == 'Direct'
-				parameters.series[0].data.push(row.confirmed)
-				parameters.series[1].data.push(row.logged_in)
-				parameters.series[2].data.push(row.first_battle)
-				parameters.series[3].data.push(row.first_upgrade)
-				parameters.series[4].data.push(row.tank_purchase)
-			else
-				parameters.series[5].data.push(row.confirmed)
-				parameters.series[6].data.push(row.logged_in)
-				parameters.series[7].data.push(row.first_battle)
-				parameters.series[8].data.push(row.first_upgrade)
-				parameters.series[9].data.push(row.tank_purchase)
+			parameters.series[0].data.push(row.confirmed)
+			parameters.series[1].data.push(row.logged_in)
+			parameters.series[2].data.push(row.first_battle)
+			parameters.series[3].data.push(row.first_upgrade)
+			parameters.series[4].data.push(row.tank_purchase)
 				
-			if date_range != row.start_date + "<br>" + row.end_date
-				parameters.categories.push(row.start_date + "<br>" + row.end_date)
-				date_range = row.start_date + "<br>" + row.end_date
+			if date_range != row.start_date
+				aux_date = row.start_date.split("-")
+				new_date = new Date(aux_date[1] + '-' + aux_date[2] + '-' + aux_date[0])
+				parameters.categories.push(short_month_data[new_date.getMonth()] + ' ' + new_date.getDate())
+				date_range = row.start_date
 		parameters
 			
-	generate_graph = (parameters)->
+	generate_graph = (parameters, container, title)->
 		chart = new Highcharts.Chart
 			chart:
-				renderTo: 'chart'
-				defaultSeriesType: 'spline'
+				renderTo: container
+				defaultSeriesType: 'line'
 				marginRight: 230
 				marginBottom: 45
 			title: 
-				text: 'Reporte'
+				text: title
 				x: -20 #center
 			subtitle:
 				text: 'Temp'
@@ -56,7 +49,7 @@ $ ->
 				plotLines: [ {value: 0, width: 1, color: '#808080'} ]
 			tooltip: 
 				formatter: ()-> 
-					'<b>'+ this.series.name + '</b><br/>' + this.x.replace('<br>','/') + ': ' + this.y
+					'<b>'+ this.series.name + '</b><br/>' + this.x + ': ' + this.y
 			legend:
 				layout: 'vertical'
 				align: 'right'
@@ -71,9 +64,12 @@ $ ->
 				enabled: false
 	
 	get_data = ()->
-		$.getJSON '/funnels/'+ $('#begin').val()+'/'+$('#end').val()+'.json', (data)->
+		$.getJSON '/funnels/'+ $('#begin').val()+'/'+$('#end').val()+'/Direct.json', (data)->
 			parameters = format_data(data)
-			generate_graph parameters
+			generate_graph parameters, 'chart1', 'Direct'
+		$.getJSON '/funnels/'+ $('#begin').val()+'/'+$('#end').val()+'/Ads.json', (data)->
+			parameters = format_data(data)
+			generate_graph parameters, 'chart2', 'Ads'
 			
 	get_data()
 	$('ul.pills li a').click (event)->

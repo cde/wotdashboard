@@ -6,6 +6,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
 //= require bootstrap-alerts-1.3.0
 //= require bootstrap-dropdown-1.3.0
+var month_data = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+var short_month_data = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
