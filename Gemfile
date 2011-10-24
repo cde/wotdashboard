@@ -1,3 +1,6 @@
+require 'rbconfig'
+HOST_OS = Config::CONFIG['host_os']
+
 source 'http://rubygems.org'
 
 gem 'rails', '3.1.0'
@@ -24,14 +27,13 @@ gem 'jquery-rails'
 # Deploy with Capistrano
 # gem 'capistrano'
 
-# To use debugger
-#gem 'ruby-debug19', :require => 'ruby-debug'
-
 gem "devise", ">= 1.4.5"
 gem "frontend-helpers"
 
-gem 'jquery-rails'
-gem 'twitter-bootstrap-rails', '~> 0.0.5'
+# install a Javascript runtime for linux
+if HOST_OS =~ /linux/i
+  gem 'therubyracer', '>= 0.8.2'
+end
 
 gem "haml", ">= 3.1.2"
 gem "haml-rails", ">= 0.3.4", :group => :development
@@ -63,12 +65,14 @@ end
 group :development, :test do
   gem 'sqlite3'
   gem "rspec-rails", ">= 2.6.1"
+  #An IRB alternative and runtime developer console
   gem "pry"
+  # To use debugger
   gem 'ruby-debug19', :require => 'ruby-debug'
 end
 
 group :production do
-  #An IRB alternative and runtime developer console
+
   gem 'pg'
 end
 
