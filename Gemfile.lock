@@ -206,6 +206,9 @@ GEM
       polyglot (>= 0.3.1)
     turn (0.8.3)
       ansi
+    twitter-bootstrap-rails (0.0.5)
+      railties (~> 3.0)
+      thor (~> 0.14)
     tzinfo (0.3.30)
     uglifier (1.0.4)
       execjs (>= 0.3.0)
@@ -241,4 +244,5 @@ DEPENDENCIES
   shoulda
   sqlite3
   turn
+  twitter-bootstrap-rails (~> 0.0.5)
   uglifier
