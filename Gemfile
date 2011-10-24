@@ -1,5 +1,5 @@
-require 'rbconfig'
-HOST_OS = Config::CONFIG['host_os']
+#  require 'rbconfig'
+#HOST_OS = Config::CONFIG['host_os']
 
 source 'http://rubygems.org'
 
@@ -28,9 +28,10 @@ gem "devise", ">= 1.4.5"
 gem "frontend-helpers"
 
 # install a Javascript runtime for linux
-if HOST_OS =~ /linux/i
-  gem 'therubyracer', '>= 0.8.2'
-end
+# This doesn' work for stack bamboo-mri-1.9.2 - heroku'
+#if HOST_OS =~ /linux/i
+#gem 'therubyracer', '>= 0.8.2'
+#end
 # To use debugger
 #gem 'ruby-debug19', :require => 'ruby-debug'
 
@@ -79,6 +80,7 @@ end
 
 group :production do
   gem 'pg'
+  gem 'therubyracer-heroku'
 end
 
 
