@@ -25,7 +25,7 @@ end
 gem "devise", ">= 1.4.5"
 gem "frontend-helpers"
 
-
+# install a Javascript runtime for linux
 # This doesn' work for stack bamboo-mri-1.9.2 - heroku'
 #if HOST_OS =~ /linux/i
 #gem 'therubyracer', '>= 0.8.2'
