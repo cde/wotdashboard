@@ -34,7 +34,7 @@ class FunnelsController < ApplicationController
     unless params[:data_file].nil?
       begin
         #Todo: we'll probably store this in amazon s3'
-        funnels = Wot::ProcessFile.load_data("tmp/data/"+ Base64.decode64(params[:data_file]))
+        funnels = Wot::ProcessFile.load_data("data/"+ Base64.decode64(params[:data_file]))
         if funnels
           Wot::ProcessFile.create_funnels(funnels[:ads], "Ads")
           Wot::ProcessFile.create_funnels(funnels[:direct], "Direct")
