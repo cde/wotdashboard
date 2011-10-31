@@ -14,7 +14,7 @@
 	%div.page-header
 		%h2
 			Add Files
-			%small Here you can add files data in the app
+			%small= "Here you can add files data in the app #{Rails.env}"
 	%div.row
 		%div.span12
 			= form_for :funnels, {:url => funnels_preview_path} do |f|

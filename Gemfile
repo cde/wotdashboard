@@ -38,7 +38,10 @@ gem "haml", ">= 3.1.2"
 gem "haml-rails", ">= 0.3.4", :group => :development
 
 gem "csv-mapper"
+# To upload files
 gem 'carrierwave'
+# The Ruby cloud services library. To store files in amazon s3. Instead of aws-s3
+gem 'fog'
 
 group :test do
   # Pretty printed test output
