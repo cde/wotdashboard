@@ -14,10 +14,15 @@ class FunnelsController < ApplicationController
         uploader = DataUploader.new
         uploader.store!(params[:funnels][:file])
         logger.warn "uploader #{uploader.inspect}"
+#
+#@connection ||= begin
+#=> 101            ::Fog::Storage.new(uploader.fog_credentials)
+#   102          end
+
 
         @funnels = Wot::ProcessFile.load_data((params[:funnels][:file].tempfile).to_path, true)
         unless @funnels.empty?
-
+          @uploader = uploader
           @data_file = Base64.encode64(params[:funnels][:file].original_filename)
         end
       rescue Exception => e
@@ -36,8 +41,21 @@ class FunnelsController < ApplicationController
         #Todo: we'll probably store this in amazon s3'
         debugger
 
-        dir_store = (Rails.env != 'development')?  "/data/" : "public/data/"
-        funnels = Wot::ProcessFile.load_data(dir_store + Base64.decode64(params[:data_file]))
+        #uploader = DataUploader.new
+        #uploader.store!(params[:data_file])
+        #logger.warn "uploader #{uploader.inspect}"
+
+        if Rails.env != 'development'
+          @connection ||= begin
+          ::Fog::Storage.new(uploader.fog_credentials)
+          end
+          file_path = "#{@connection.directories.get('wotdashboard').public_url}/#{uploader.store_dir}/"
+        else
+          file_path = "public/data/"
+        end
+        #dir_store = (Rails.env != 'development')?  "#{uploader.store_dir}" : "public/data/"
+
+        funnels = Wot::ProcessFile.load_data(file_path + Base64.decode64(params[:data_file]))
         if funnels
           Wot::ProcessFile.create_funnels(funnels[:ads], "Ads")
           Wot::ProcessFile.create_funnels(funnels[:direct], "Direct")
