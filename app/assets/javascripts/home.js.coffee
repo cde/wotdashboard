@@ -21,20 +21,23 @@ $ ->
 			parameters.series[2].data.push(row.first_battle)
 			parameters.series[3].data.push(row.first_upgrade)
 			parameters.series[4].data.push(row.tank_purchase)
-				
+
 			if date_range != row.start_date
 				aux_date = row.start_date.split("-")
 				new_date = new Date(aux_date[1] + '-' + aux_date[2] + '-' + aux_date[0])
+#				console.log(aux_date[1] + '-' + aux_date[2] + '-' + aux_date[0])
+				console.log new_date
 				parameters.categories.push(short_month_data[new_date.getMonth()] + ' ' + new_date.getDate())
+				console.log parameters.categories
 				date_range = row.start_date
 		parameters
-		
+
 	generate_graph = (parameters, container, title, type_graphic)->
 		if type_graphic == 'funnel'
 		  generate_graph_funnel(parameters, container, title)
 		else
 		  generate_graph_normal(parameters, container, title, type_graphic)
-		
+
 	generate_graph_funnel = (parameters, container, title)->
 		chart = new Highcharts.Chart
 			chart:
@@ -42,15 +45,15 @@ $ ->
 				defaultSeriesType: 'funnel'
 				margin: [50, 10, 60, 170]
 				borderWidth: 1
-			title: 
+			title:
 				text: title
 				x: -20 #center
 			plotArea:
 				shadow: null
 				borderWidth: null
 				backgroundColor: null
-			tooltip: 
-				formatter: ()-> 
+			tooltip:
+				formatter: ()->
 					'<b>'+ this.series.name + '</b><br/>' + this.x + ': ' + this.y
 			plotOptions:
 				series:
@@ -70,20 +73,20 @@ $ ->
 				enabled: false
 			exporting:
 				enabled: false
-			
+
 	generate_graph_normal = (parameters, container, title, type_graphic)->
 		plot_options = {}
 		stack_labels = {}
 		if type_graphic == 'column'
-			plot_options = 
-				column: 
+			plot_options =
+				column:
 					stacking: 'normal'
 					dataLabels:
 						enabled: true
 						color: 'white'
-			stack_labels: 
+			stack_labels:
 				enabled: true
-				style: 
+				style:
 					fontWeight: 'bold'
 					color: 'gray'
 		chart = new Highcharts.Chart
@@ -92,7 +95,7 @@ $ ->
 				defaultSeriesType: type_graphic
 				marginRight: 230
 				marginBottom: 45
-			title: 
+			title:
 				text: title
 				x: -20 #center
 			subtitle:
@@ -105,8 +108,8 @@ $ ->
 					text: 'Users'
 				plotLines: [ {value: 0, width: 1, color: '#808080'} ]
 				stackLabels: stack_labels
-			tooltip: 
-				formatter: ()-> 
+			tooltip:
+				formatter: ()->
 					'<b>'+ this.series.name + '</b><br/>' + this.x + ': ' + this.y
 			plotOptions: plot_options
 			legend:
@@ -121,7 +124,7 @@ $ ->
 				enabled: false
 			exporting:
 				enabled: false
-	
+
 	get_data = (type_graphic)->
 		$.getJSON '/funnels/'+ $('#begin').val()+'/'+$('#end').val()+'/Direct.json', (data)->
 			parameters = format_data(data)
@@ -129,9 +132,9 @@ $ ->
 		$.getJSON '/funnels/'+ $('#begin').val()+'/'+$('#end').val()+'/Ads.json', (data)->
 			parameters = format_data(data)
 			generate_graph(parameters, 'chart2', 'Ads', type_graphic)
-			
+
 	get_data('line')
-	
+
 	get_graphic_type = ->
 		if $('ul.pills li.active a').html() == 'Lines'
 			return 'line'
@@ -139,16 +142,41 @@ $ ->
 		  return 'column'
 		if $('ul.pills li.active a').html() == 'Funnels'
 			return 'funnel'
-	
+
 	$('ul.pills li a').click (event)->
 		event.preventDefault()
 		$('ul.pills li').removeClass('active')
 		$(this).parent('li').addClass('active')
 		get_data(get_graphic_type())
-		
+
 	$('#generate').click (event)->
 		event.preventDefault()
 		get_data(get_graphic_type())
+<<<<<<< HEAD
 	
 	new DatePicker("#begin");
 	new DatePicker("#end");
+=======
+
+	$('#begin').DatePicker
+		format:'Y-m-d'
+		date: new Date
+		starts: 1
+		position: 'right'
+		onBeforeShow: ()->
+			$('#begin').DatePickerSetDate $('#begin').val(), true
+		onChange: (formated, dates)->
+			$('#begin').val(formated);
+			$('#begin').DatePickerHide()
+
+	$('#end').DatePicker
+		format:'Y-m-d'
+		date: new Date
+		starts: 1
+		position: 'right'
+		onBeforeShow: ()->
+			$('#end').DatePickerSetDate $('#end').val(), true
+		onChange: (formated, dates)->
+			$('#end').val(formated);
+			$('#end').DatePickerHide()
+>>>>>>> 728dfcffc7adf20dc9d524224b22203caebe5d7e

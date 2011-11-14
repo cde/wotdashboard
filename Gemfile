@@ -16,8 +16,6 @@ group :assets do
   gem 'uglifier'
 end
 
-gem 'jquery-rails'
-
 # Use unicorn as the web server
 # gem 'unicorn'
 
@@ -32,8 +30,6 @@ gem "frontend-helpers"
 #if HOST_OS =~ /linux/i
 #gem 'therubyracer', '>= 0.8.2'
 #end
-# To use debugger
-#gem 'ruby-debug19', :require => 'ruby-debug'
 
 gem 'jquery-rails'
 gem 'twitter-bootstrap-rails', '~> 0.0.5'
@@ -42,7 +38,10 @@ gem "haml", ">= 3.1.2"
 gem "haml-rails", ">= 0.3.4", :group => :development
 
 gem "csv-mapper"
+# To upload files
 gem 'carrierwave'
+# The Ruby cloud services library. To store files in amazon s3. Instead of aws-s3
+gem 'fog'
 
 group :test do
   # Pretty printed test output
