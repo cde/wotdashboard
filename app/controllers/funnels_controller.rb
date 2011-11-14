@@ -14,10 +14,9 @@ class FunnelsController < ApplicationController
         uploader = DataUploader.new
         uploader.store!(params[:funnels][:file])
         logger.warn "uploader #{uploader.inspect}"
-
+        binding.pry
         @funnels = Wot::ProcessFile.load_data((params[:funnels][:file].tempfile).to_path, true)
         unless @funnels.empty?
-
           @data_file = Base64.encode64(params[:funnels][:file].original_filename)
         end
       rescue Exception => e
