@@ -152,31 +152,6 @@ $ ->
 	$('#generate').click (event)->
 		event.preventDefault()
 		get_data(get_graphic_type())
-<<<<<<< HEAD
 	
 	new DatePicker("#begin");
 	new DatePicker("#end");
-=======
-
-	$('#begin').DatePicker
-		format:'Y-m-d'
-		date: new Date
-		starts: 1
-		position: 'right'
-		onBeforeShow: ()->
-			$('#begin').DatePickerSetDate $('#begin').val(), true
-		onChange: (formated, dates)->
-			$('#begin').val(formated);
-			$('#begin').DatePickerHide()
-
-	$('#end').DatePicker
-		format:'Y-m-d'
-		date: new Date
-		starts: 1
-		position: 'right'
-		onBeforeShow: ()->
-			$('#end').DatePickerSetDate $('#end').val(), true
-		onChange: (formated, dates)->
-			$('#end').val(formated);
-			$('#end').DatePickerHide()
->>>>>>> 728dfcffc7adf20dc9d524224b22203caebe5d7e
