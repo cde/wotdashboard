@@ -23,12 +23,9 @@ $ ->
 			parameters.series[4].data.push(row.tank_purchase)
 
 			if date_range != row.start_date
-				aux_date = row.start_date.split("-")
-				new_date = new Date(aux_date[1] + '-' + aux_date[2] + '-' + aux_date[0])
-#				console.log(aux_date[1] + '-' + aux_date[2] + '-' + aux_date[0])
-				console.log new_date
+				aux_date = row.start_date.replace(/-/g,'/')
+				new_date = new Date(aux_date)
 				parameters.categories.push(short_month_data[new_date.getMonth()] + ' ' + new_date.getDate())
-				console.log parameters.categories
 				date_range = row.start_date
 		parameters
 
