@@ -158,11 +158,11 @@ $ ->
 			for index in [0..chart.series[0].data.length - 1]
 				if index > 0 && chart.series[0].data[index + 1] != undefined && chart.series[0].data[index].config != null
 					aux_label = Math.round((parseFloat(chart.series[0].data[index + 1].config) * 100) / parseFloat(chart.series[0].data[index].config))
-					create_label_graph chart, aux_label.toString() + "%", {y: 150, x: chart.series[0].data[index + 1].plotX + chart.plotLeft - 75, color: 'green'}
+					create_label_graph chart, aux_label.toString() + "%", {y: chart.series[0].data[index].barH + chart.series[0].data[index].barY + chart.plotTop - 15, x: chart.series[0].data[index + 1].plotX + chart.plotLeft - 75, color: 'green'}
 					aux_label2 = 100 - aux_label
-					create_label_graph chart, aux_label2.toString() + "%", {y: 190, x: chart.series[0].data[index + 1].plotX + chart.plotLeft - 75, color: 'red'}
+					create_label_graph chart, aux_label2.toString() + "%", {y: chart.series[1].data[index].barY + chart.plotTop + 25, x: chart.series[0].data[index + 1].plotX + chart.plotLeft - 75, color: 'red'}
 				if index > 0 && chart.series[0].data[index].config != null
-					aux_label = (parseFloat(chart.series[0].data[index].config) * 100) / parseFloat(chart.series[0].data[0].config)
+					aux_label = Math.round((parseFloat(chart.series[0].data[index].config) * 100) / parseFloat(chart.series[0].data[0].config))
 					create_label_graph chart, aux_label.toString() + "%", {y: chart.series[0].data[index].plotY + chart.plotTop - 15, x: chart.series[0].data[index].plotX + chart.plotLeft - 10, color: 'gray'}
 					aux_label2 = 100 - aux_label
 					create_label_graph chart, aux_label2.toString() + "%", {y: chart.series[1].data[index].plotY + chart.plotTop + 25, x: chart.series[0].data[index].plotX + chart.plotLeft - 10, color: 'gray'}
@@ -175,14 +175,14 @@ $ ->
 				generate_graph(parameters, 'chart1', 'Direct', type_graphic)
 			$.getJSON '/funnels/adquisition/'+ $('#begin').val()+'/'+$('#end').val()+'/Ads.json', (data)->
 				parameters = format_data_adquisition(data)
-				generate_graph(parameters, 'chart2', 'Direct', type_graphic)
+				generate_graph(parameters, 'chart2', 'Ads', type_graphic)
 		else
 			$.getJSON '/funnels/normal/'+ $('#begin').val()+'/'+$('#end').val()+'/Direct.json', (data)->
 				parameters = format_data_normal(data)
 				generate_graph(parameters, 'chart1', 'Direct', type_graphic)
 			$.getJSON '/funnels/normal/'+ $('#begin').val()+'/'+$('#end').val()+'/Ads.json', (data)->
 				parameters = format_data_normal(data)
-				generate_graph(parameters, 'chart2', 'Direct', type_graphic)
+				generate_graph(parameters, 'chart2', 'Ads', type_graphic)
 
 	get_data('adquisition')
 
