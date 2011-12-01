@@ -1,0 +1,52 @@
+= content_for :head do
+	= javascript_include_tag "home"
+%div.sidebar
+	%div.well
+		%h5 Report
+		=form_for(:user, :url => {:controller => 'home', :action => 'index'}) do |f|
+			%p= f.select :name, [['Report 1', 1],['Report 2', 2]], {:prompt => 'select one'},:class => 'medium'
+			%p= f.text_field :week, :class => 'span3'
+			%p= f.submit 'Go', :class => 'btn small primary'
+	%div.well
+		%h5 Related Reports
+		%ul
+			%li
+				%a{:href=> "#"} Report 3
+			%li
+				%a{:href=> "#"} Report 14
+			%li
+				%a{:href=> "#"} Report 2
+%div.content
+	- flash.each do |name, msg|
+		= show_flash name, msg
+	%div.page-header
+		%h2
+			Dashboard
+			%small Generate chart
+	%ul.breadcrumb
+		%li
+			%a{:href => "#"} Dashboard
+			%span.divider /
+		%li.active
+			%a{:href => "#"} tmp
+	%div.row{:style => 'display:table'}
+		%div.span1 To
+		%div.span5= text_field_tag 'begin', date_formated(-15)
+		%div.span1 From
+		%div.span5= text_field_tag 'end', date_formated
+		%div.span4= link_to "Generate chart", "#", :class => 'btn', :id => 'generate'
+	%div.row
+		%div.span16
+			%div{:style => "width:100%;height:320px", :id => 'chart1'}
+	%div.row
+		%div.span16
+			%div{:style => "width:100%;height:320px", :id => 'chart2'}
+	%div.row
+		%div.span16
+			%h4 Choose a graphic
+	%div.row
+		%div.span16
+			%ul.pills
+				%li.active= link_to 'Adquisition', '#'
+				%li= link_to 'Lines', '#'
+				%li= link_to 'Bars', '#'
