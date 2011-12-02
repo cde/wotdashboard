@@ -11,23 +11,23 @@ $( ->
 		new Wot.Graph('chart2', get_graphic_type(), 'direct', $('#begin').val(), $('#end').val())
 
 	get_graphic_type = ->
-		if $('ul.pills li.active a').html() == 'Lines'
-			return 'line'
-		if $('ul.pills li.active a').html() == 'Adquisition'
-		  return 'adquisition'
-		if $('ul.pills li.active a').html() == 'Bars'
-			return 'column'
-
+		$('ul.pills li.active a').attr('type')
+	
 	$('ul.pills li a').click (event)->
 		event.preventDefault()
 		$('ul.pills li').removeClass('active')
 		$(this).parent('li').addClass('active')
 		get_data()
-
+	
+	$('#save').click (event)->
+		$().data('modal')
+	
 	$('#generate').click (event)->
 		event.preventDefault()
 		get_data()
-		
+	
+	$('ul.pills li:first-child').addClass('active')
+	
 	get_data()
 	
 	new DatePicker("#begin", {format: 'Y-m-d'});

@@ -31,10 +31,11 @@
 			%a{:href => "#"} tmp
 	%div.row{:style => 'display:table'}
 		%div.span1 To
-		%div.span5= text_field_tag 'begin', date_formated(-15)
+		%div.span4= text_field_tag 'begin', date_formated(-15)
 		%div.span1 From
-		%div.span5= text_field_tag 'end', date_formated
+		%div.span4= text_field_tag 'end', date_formated
 		%div.span4= link_to "Generate chart", "#", :class => 'btn', :id => 'generate'
+		%div.span3= link_to "Save chart", "#", :class => 'btn', :id => 'save', :'data-controls-modal'=>"my-modal", :'data-backdrop' => "static"
 	%div.row
 		%div.span16
 			%div{:style => "width:100%;height:320px", :id => 'chart1'}
@@ -47,6 +48,5 @@
 	%div.row
 		%div.span16
 			%ul.pills
-				%li.active= link_to 'Adquisition', '#'
-				%li= link_to 'Lines', '#'
-				%li= link_to 'Bars', '#'
+				- @graphics.each do |graph|
+					%li= link_to graph.title, '#', title: graph.description, type: graph.chart_type
