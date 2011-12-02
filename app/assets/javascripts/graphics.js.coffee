@@ -50,10 +50,12 @@ class Wot.Graph
 		else
 		  this.generate_graph_normal(parameters, this.container, this.type_data, this.type_graphic)
 	create_label_graph: (chart, text, options)->
-		text = chart.renderer.text(text, options.x, options.y).attr({zIndex: 5}).css({color: options.color}).add()
+		text = chart.renderer.text(text, options.x, options.y).attr({zIndex: 6}).css({color: options.color}).add()
 		box = text.getBBox()
 		chart.renderer.rect(box.x - 5, box.y - 5, box.width + 10, box.height + 10, 5).attr({fill: '#FFF', stroke: 'gray', 'stroke-width': 1, zIndex: 4}).add()
 	generate_graph_normal: (parameters, container, title, type_graphic)->
+		myClass = this
+		title = title + "  (" + this.date_from + " to " + this.date_to + ")"
 		plot_options = {}
 		stack_labels = {}
 		if type_graphic == 'column'
@@ -108,6 +110,8 @@ class Wot.Graph
 		)
 
 	generate_graph_adquisition: (parameters, container, title, type_graphic)->
+		myClass = this
+		title = title + "  (" + this.date_from + " to " + this.date_to + ")"
 		plot_options = {}
 		stack_labels = {}
 		if type_graphic == 'column'
@@ -161,12 +165,12 @@ class Wot.Graph
 			for index in [0..chart.series[0].data.length - 1]
 				if index > 0 && chart.series[0].data[index + 1] != undefined && chart.series[0].data[index].config != null
 					aux_label = Math.round((parseFloat(chart.series[0].data[index + 1].config) * 100) / parseFloat(chart.series[0].data[index].config))
-					this.create_label_graph chart, aux_label.toString() + "%", {y: chart.series[0].data[index].barH + chart.series[0].data[index].barY + chart.plotTop - 15, x: chart.series[0].data[index + 1].plotX + chart.plotLeft - 75, color: 'green'}
+					myClass.create_label_graph chart, aux_label.toString() + "%", {y: chart.series[0].data[index].barH + chart.series[0].data[index].barY + chart.plotTop - 15, x: chart.series[0].data[index + 1].plotX + chart.plotLeft - 75, color: 'green'}
 					aux_label2 = 100 - aux_label
-					this.create_label_graph chart, aux_label2.toString() + "%", {y: chart.series[1].data[index].barY + chart.plotTop + 25, x: chart.series[0].data[index + 1].plotX + chart.plotLeft - 75, color: 'red'}
+					myClass.create_label_graph chart, aux_label2.toString() + "%", {y: chart.series[1].data[index].barY + chart.plotTop + 25, x: chart.series[0].data[index + 1].plotX + chart.plotLeft - 75, color: 'red'}
 				if index > 0 && chart.series[0].data[index].config != null
 					aux_label = Math.round((parseFloat(chart.series[0].data[index].config) * 100) / parseFloat(chart.series[0].data[0].config))
-					this.create_label_graph chart, aux_label.toString() + "%", {y: chart.series[0].data[index].plotY + chart.plotTop - 15, x: chart.series[0].data[index].plotX + chart.plotLeft - 10, color: 'gray'}
+					myClass.create_label_graph chart, aux_label.toString() + "%", {y: chart.series[0].data[index].plotY + chart.plotTop - 15, x: chart.series[0].data[index].plotX + chart.plotLeft - 10, color: 'gray'}
 					aux_label2 = 100 - aux_label
-					this.create_label_graph chart, aux_label2.toString() + "%", {y: chart.series[1].data[index].plotY + chart.plotTop + 25, x: chart.series[0].data[index].plotX + chart.plotLeft - 10, color: 'gray'}
+					myClass.create_label_graph chart, aux_label2.toString() + "%", {y: chart.series[1].data[index].plotY + chart.plotTop + 25, x: chart.series[0].data[index].plotX + chart.plotLeft - 10, color: 'gray'}
 		)

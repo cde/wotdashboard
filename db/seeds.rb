@@ -17,11 +17,11 @@ if Funnel.all.empty? && Rails.env == 'development'
 
 
     if start_time.nil? && end_time.nil?
-      start_time = DateTime.new(2011, 01, 03)
-      end_time = start_time + 1.week
+      start_time = DateTime.new(2011, 9, 05)
+      end_time = start_time + 4.day
     else
-      start_time = end_time + 1.day
-      end_time = start_time + 1.week
+      start_time = start_time + 1.week
+      end_time = start_time + 4.day
     end
     Funnel.create(:traffic_type => 'Direct', :confirmed => 10000 * i, :logged_in => (10000 * i) * 0.8, :first_battle=> (10000 * i) * 0.6,:first_upgrade => (10000 * i) * 0.4, :tank_purchase => (10000 * i) * 0.2, :start_date => start_time, :end_date => end_time )
     Funnel.create(:traffic_type => 'Ads', :confirmed => 5000  * i, :logged_in => (5000  * i) * 0.8, :first_battle=> (5000  * i) * 0.6, :first_upgrade => (5000  * i) * 0.4, :tank_purchase => (5000  * i) * 0.2, :start_date => start_time, :end_date => end_time )
