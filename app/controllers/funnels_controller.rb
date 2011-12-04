@@ -67,4 +67,25 @@ class FunnelsController < ApplicationController
       format.json { render :json => @funnel_data }
     end
   end
+
+  def save_report
+    graph = Graphic.where(:chart_type => params[:report][:chart_type])
+    report = Report.new(params[:report])
+    report.graphic_id = graph
+    report.user_id = current_user.id
+    if report.save
+      render :json => {status: 200}
+    else
+      render :json => {status: 101, error: report.errors}
+    end
+    
+    #report = Report.create(params[:report])
+    #report.user_id = current_user.id
+    #report.save
+    #if report.has_errors
+      
+    #else
+      
+    #end
+  end
 end

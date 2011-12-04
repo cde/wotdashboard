@@ -19,6 +19,29 @@
 %div.content
 	- flash.each do |name, msg|
 		= show_flash name, msg
+	%div#modal-from-dom{class: 'modal hide fade'}
+		%div.modal-header
+			=link_to '&times;'.html_safe, '#', class: 'close'
+			%h3 Save report
+		%div.modal-body
+			%div{style:'height: 80px;display:none', id: 'report_error'}
+				%h2 Error
+			%div{style:'height: 80px;display:none', id: 'report_loading'}
+				Loading...
+			%div{style:'height: 80px', id: 'report_form'}
+				= form_for '#', {class: 'form-stacked'} do |f|
+					%div.clearfix
+						%label{for: 'title'} Title
+						%div.input
+							= text_field_tag :report_title, nil, :class => 'xInput'
+					%div.clearfix
+						%label{for: 'note'} Note
+						%div.input
+							= text_field_tag :report_note, nil, :class => 'xInput'
+		%div.modal-footer
+			=link_to 'Try again', '#', class: 'btn primary', id: 'modal_try', style: 'display:none'
+			=link_to 'Save', '#', class: 'btn primary', id: 'modal_save'
+			=link_to 'Cancel', '#', class: 'btn secondary', id: 'modal_cancel'
 	%div.page-header
 		%h2
 			Dashboard
@@ -31,10 +54,11 @@
 			%a{:href => "#"} tmp
 	%div.row{:style => 'display:table'}
 		%div.span1 To
-		%div.span5= text_field_tag 'begin', date_formated(-15)
+		%div.span4= text_field_tag 'begin', date_formated(-15)
 		%div.span1 From
-		%div.span5= text_field_tag 'end', date_formated
+		%div.span4= text_field_tag 'end', date_formated
 		%div.span4= link_to "Generate chart", "#", :class => 'btn', :id => 'generate'
+		%div.span3= link_to "Save chart", "#", :class => 'btn', :id => 'save', :'data-controls-modal'=>"modal-from-dom", :'data-backdrop' => "static"
 	%div.row
 		%div.span16
 			%div{:style => "width:100%;height:320px", :id => 'chart1'}
@@ -47,6 +71,5 @@
 	%div.row
 		%div.span16
 			%ul.pills
-				%li.active= link_to 'Adquisition', '#'
-				%li= link_to 'Lines', '#'
-				%li= link_to 'Bars', '#'
+				- @graphics.each do |graph|
+					%li= link_to graph.title, '#', title: graph.description, type: graph.chart_type
