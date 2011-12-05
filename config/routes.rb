@@ -3,6 +3,7 @@ Wotdashboard::Application.routes.draw do
   match "funnels" => "funnels#index", :as => :funnels
   match "funnels/normal/:start/:end/:traffic_type" => "funnels#get_data_normal", :as => :funnels_get_data_normal
   match "funnels/adquisition/:start/:end/:traffic_type" => "funnels#get_data_adquisition", :as => :funnels_get_data_adquisition
+  post "funnels/save_report" => "funnels#save_report"
   match "preview" => "funnels#preview", :as => :funnels_preview
   match "process/:data_file" => "funnels#process_file", :as => :funnels_process_file
   #resources :funnels
