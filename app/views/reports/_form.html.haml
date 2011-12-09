@@ -1,0 +1,37 @@
+= form_for @report do |f|
+  -if @report.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@report.errors.count, "error")} prohibited this report from being saved:"
+      %ul
+        - @report.errors.full_messages.each do |msg|
+          %li= msg
+  %div.row
+    %fieldset
+      = f.label :title
+      = f.text_field :title
+  %div.row
+    %fieldset
+      = f.label :note
+      = f.text_area :note
+  -if @report.new_record?
+    %div.row
+      %div.span12
+        %fieldset
+          %legend You can add CSV or XLS formats
+          %div.clearfix
+            %label{:for => 'data'} Data file
+            %div.input
+              = f.file_field :data
+          %div.well{:style => 'padding: 14px 19px;text-align:center;'}
+            = f.submit 'Add', :class => 'btn primary'
+
+    %div.row
+      %div.span16
+        %h4
+          Recommendations
+          %span.label.important Important
+        %ul
+          %li You have to verify that you have the correct format
+          %li Remove blank lines between corrects lines with data
+          %li if you have any questions, consult with a support agent
+

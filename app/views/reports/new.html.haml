@@ -1,0 +1,13 @@
+%div.sidebar
+%div.content
+  - flash.each do |name, msg|
+    = show_flash name, msg
+  %div.page-header
+    %h2
+      Add Files
+      %small= "Here you can add files data in the app #{Rails.env}"
+  %div.row
+    %div.span12
+      = render 'form'
+
+      = link_to 'Back', reports_path

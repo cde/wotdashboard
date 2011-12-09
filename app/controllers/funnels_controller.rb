@@ -11,11 +11,11 @@ class FunnelsController < ApplicationController
   def preview
     unless params[:funnels].nil?
       begin
+
         uploader = DataUploader.new
         uploader.store!(params[:funnels][:file])
-        logger.warn "uploader #{uploader.inspect}"
-        binding.pry
-        @funnels = Wot::ProcessFile.load_data((params[:funnels][:file].tempfile).to_path, true)
+
+        @funnels = Wot::ProcessFile.load_data((params[:funnels][:file].tempfile).to_path)
         unless @funnels.empty?
           @data_file = Base64.encode64(params[:funnels][:file].original_filename)
         end
@@ -35,7 +35,7 @@ class FunnelsController < ApplicationController
         #Todo: we'll probably store this in amazon s3'
 
         dir_store = (Rails.env != 'development')?  "/data/" : "public/data/"
-
+        debugger
         funnels = Wot::ProcessFile.load_data(dir_store + Base64.decode64(params[:data_file]))
         if funnels
           Wot::ProcessFile.create_funnels(funnels[:ads], "Ads")
@@ -60,7 +60,7 @@ class FunnelsController < ApplicationController
       format.json { render :json => @funnel_data }
     end
   end
-  
+
   def get_data_adquisition
     @funnel_data = Funnel.select("sum(traffic_type) traffic_type, sum(confirmed) confirmed, sum(logged_in) logged_in, sum(first_battle) first_battle, sum(first_upgrade) first_upgrade, sum(tank_purchase) tank_purchase").where(:start_date => (params[:start].to_date)..(params[:end].to_date), :traffic_type => params[:traffic_type])
     respond_to do |format|
@@ -78,14 +78,5 @@ class FunnelsController < ApplicationController
     else
       render :json => {status: 101, error: report.errors}
     end
-    
-    #report = Report.create(params[:report])
-    #report.user_id = current_user.id
-    #report.save
-    #if report.has_errors
-      
-    #else
-      
-    #end
   end
 end

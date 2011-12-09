@@ -1,21 +1,7 @@
 = content_for :head do
 	= javascript_include_tag "home"
 %div.sidebar
-	%div.well
-		%h5 Report
-		=form_for(:user, :url => {:controller => 'home', :action => 'index'}) do |f|
-			%p= f.select :name, [['Report 1', 1],['Report 2', 2]], {:prompt => 'select one'},:class => 'medium'
-			%p= f.text_field :week, :class => 'span3'
-			%p= f.submit 'Go', :class => 'btn small primary'
-	%div.well
-		%h5 Related Reports
-		%ul
-			%li
-				%a{:href=> "#"} Report 3
-			%li
-				%a{:href=> "#"} Report 14
-			%li
-				%a{:href=> "#"} Report 2
+	=# render 'sidebar'
 %div.content
 	- flash.each do |name, msg|
 		= show_flash name, msg
@@ -24,11 +10,11 @@
 			=link_to '&times;'.html_safe, '#', class: 'close'
 			%h3 Save report
 		%div.modal-body
-			%div{style:'height: 80px;display:none', id: 'report_error'}
+			%div{:style=>'height: 80px;display:none', id: 'report_error'}
 				%h2 Error
-			%div{style:'height: 80px;display:none', id: 'report_loading'}
+			%div{:style=>'height: 80px;display:none', id: 'report_loading'}
 				Loading...
-			%div{style:'height: 80px', id: 'report_form'}
+			%div{:style=>'height: 80px', id: 'report_form'}
 				= form_for '#', {class: 'form-stacked'} do |f|
 					%div.clearfix
 						%label{for: 'title'} Title
@@ -53,9 +39,9 @@
 		%li.active
 			%a{:href => "#"} tmp
 	%div.row{:style => 'display:table'}
-		%div.span1 To
+		%div.span1 From:
 		%div.span4= text_field_tag 'begin', date_formated(-15)
-		%div.span1 From
+		%div.span1 To:
 		%div.span4= text_field_tag 'end', date_formated
 		%div.span4= link_to "Generate chart", "#", :class => 'btn', :id => 'generate'
 		%div.span3= link_to "Save chart", "#", :class => 'btn', :id => 'save', :'data-controls-modal'=>"modal-from-dom", :'data-backdrop' => "static"

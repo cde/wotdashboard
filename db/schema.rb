@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20111017221813) do
     t.integer  "tank_purchase"
     t.date     "start_date"
     t.date     "end_date"
+    t.integer  "report_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -39,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20111017221813) do
     t.date     "ends_date"
     t.string   "title"
     t.text     "note"
+    t.string   "data"
     t.integer  "user_id"
     t.integer  "graphic_id"
     t.datetime "created_at"

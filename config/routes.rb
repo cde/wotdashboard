@@ -6,7 +6,9 @@ Wotdashboard::Application.routes.draw do
   post "funnels/save_report" => "funnels#save_report"
   match "preview" => "funnels#preview", :as => :funnels_preview
   match "process/:data_file" => "funnels#process_file", :as => :funnels_process_file
+
   #resources :funnels
+  resources :reports
 
   devise_for :users, :controllers => {:sessions => 'devise/sessions'}, :skip => [:sessions] do
       get 'login' => 'devise/sessions#new', :as => :new_user_session

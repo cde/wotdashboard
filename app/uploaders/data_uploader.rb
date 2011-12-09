@@ -8,12 +8,12 @@ class DataUploader < CarrierWave::Uploader::Base
   # include CarrierWave::ImageScience
 
   # Choose what kind of storage to use for this uploader:
-  if Rails.env != :development
-    storage :fog
-  else
+  #if Rails.env != :development
+  #  storage :fog
+  #else
     storage :file
-  end
-  #
+  #end
+
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
@@ -44,14 +44,20 @@ class DataUploader < CarrierWave::Uploader::Base
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_white_list
-     #%w(csv txt xls xlsx)
-     %w(csv txt)
+     %w(csv txt xls xlsx)
   end
+  #
+  #def filename
+  #  if original_filename.present?
+  #    @name ||= "#{Digest::MD5.hexdigest(original_filename).first(8)}_#{secure_token}.jpg"
+  #  end
+  #end
 
-  # Override the filename of the uploaded files:
-  # Avoid using model.id or version_name here, see uploader/store.rb for details.
-  # def filename
-  #   "something.jpg" if original_filename
-  # end
+  private
+  def secure_token
+    ivar = "@#{mounted_as}_secure_token"
+    token = model.instance_variable_get(ivar)
+    token ||= model.instance_variable_set(ivar, ActiveSupport::SecureRandom.hex(2))
+  end
 
 end

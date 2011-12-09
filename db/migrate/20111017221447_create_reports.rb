@@ -5,6 +5,7 @@ class CreateReports < ActiveRecord::Migration
       t.date :ends_date
       t.string :title
       t.text :note
+      t.string :data
       t.references :user
       t.references :graphic
 

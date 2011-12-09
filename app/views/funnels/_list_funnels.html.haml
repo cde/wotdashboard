@@ -1,22 +1,28 @@
-%h4 Direct Traffic
+- totals = funnels.last[:totals]
+%h4=title
 %table
     %thead
         %tr
             %th Week
-            -#%th Start Date
-            -#%th End Date
             %th Confirmed
             %th Logged In
             %th First Battle
             %th First Upgrade
             %th Tank Purchase
-        - direct_funnels.each do |row|
+    %tbody
+        - funnels[0...funnels.size - 1].each do |row|
             %tr
                 %td.week= row[:week]
-                -#%td= row[:start_date]
-                -#%td= row[:end_date]
                 %td= number_with_delimiter(row[:confirmed])
                 %td= number_with_delimiter(row[:logged_in])
                 %td= number_with_delimiter(row[:first_battle])
                 %td= number_with_delimiter(row[:first_upgrade])
                 %td= number_with_delimiter(row[:tank_purchase])
+    %tfoot
+        %tr
+            %td.totals Totals
+            %td=number_with_delimiter(totals[:confirmed])
+            %td=number_with_delimiter(totals[:logged_in])
+            %td=number_with_delimiter(totals[:first_battle])
+            %td=number_with_delimiter(totals[:first_upgrade])
+            %td=number_with_delimiter(totals[:tank_purchase])

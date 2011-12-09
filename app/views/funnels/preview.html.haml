@@ -1,13 +1,5 @@
 %div.sidebar
-	%div.well
-		%h5 Related Reports
-		%ul
-			%li
-				%a{:href=> "#"} Report 3
-			%li
-				%a{:href=> "#"} Report 14
-			%li
-				%a{:href=> "#"} Report 2
+=# render 'sidebar'
 %div.content
 	- flash.each do |name, msg|
 		= show_flash name, msg
@@ -17,8 +9,8 @@
 			%small Preview
 	%div.row
 		%div.span12
-			= render :partial=> 'direct_funnels', :locals => {:direct_funnels => @funnels[:direct]}
-			= render :partial=> 'ads_funnels', :locals => {:ads_funnels => @funnels[:ads]}
+			= render :partial=> 'list_funnels', :locals => {:funnels => @funnels[:direct], :title => 'Direct Traffic'}
+			= render :partial=> 'list_funnels', :locals => {:funnels => @funnels[:ads], :title =>'With Promo Actions/Ads'}
 			%div.well{:style => 'padding: 14px 19px;text-align:center;'}
 				%div.action
 					= link_to 'Cancel', funnels_path, :class => 'btn cancel'

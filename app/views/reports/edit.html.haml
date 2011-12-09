@@ -1,0 +1,17 @@
+%div.sidebar
+
+%div.content
+  %p#notice= notice
+  - flash.each do |name, msg|
+    = show_flash name, msg
+  %div.page-header
+    %h2
+      Reports
+      %small= "Editing"
+  %div.row
+    %div.span12
+      = render 'form'
+
+      = link_to 'Show', @report
+      \|
+      = link_to 'Back', reports_path
