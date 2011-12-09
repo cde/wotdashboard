@@ -4,8 +4,11 @@ Wotdashboard::Application.routes.draw do
   match "funnels/normal/:start/:end/:traffic_type" => "funnels#get_data_normal", :as => :funnels_get_data_normal
   match "funnels/adquisition/:start/:end/:traffic_type" => "funnels#get_data_adquisition", :as => :funnels_get_data_adquisition
   post "funnels/save_report" => "funnels#save_report"
+  post "funnels/update_report" => "funnels#update_report"
+  post "results" => "home#results", :as => :home_results
   match "preview" => "funnels#preview", :as => :funnels_preview
   match "process/:data_file" => "funnels#process_file", :as => :funnels_process_file
+  match ":id/:title" => "home#get_report", :as => :get_report
   #resources :funnels
 
   devise_for :users, :controllers => {:sessions => 'devise/sessions'}, :skip => [:sessions] do

@@ -1,0 +1,4 @@
+%h5 Find reports
+=form_for(:user, :url => home_results_path) do |f|
+	%p= f.text_field :title, :class => 'span3'
+	%p= f.submit 'Go', :class => 'btn small primary'

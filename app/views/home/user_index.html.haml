@@ -2,20 +2,9 @@
 	= javascript_include_tag "home_user"
 %div.sidebar
 	%div.well
-		%h5 Report user
-		=form_for(:user, :url => {:controller => 'home', :action => 'index'}) do |f|
-			%p= f.select :name, [['Report 1', 1],['Report 2', 2]], {:prompt => 'select one'},:class => 'medium'
-			%p= f.text_field :week, :class => 'span3'
-			%p= f.submit 'Go', :class => 'btn small primary'
+		= render :partial => 'form_search_report'
 	%div.well
-		%h5 Related Reports
-		%ul
-			%li
-				%a{:href=> "#"} Report 3
-			%li
-				%a{:href=> "#"} Report 14
-			%li
-				%a{:href=> "#"} Report 2
+		= render :partial => 'recent_reports'
 %div.content
 	- flash.each do |name, msg|
 		= show_flash name, msg
