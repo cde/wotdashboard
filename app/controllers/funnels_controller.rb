@@ -15,7 +15,8 @@ class FunnelsController < ApplicationController
         uploader = DataUploader.new
         uploader.store!(params[:funnels][:file])
 
-        @funnels = Wot::ProcessFile.load_data((params[:funnels][:file].tempfile).to_path)
+        logger.warn "uploader #{uploader.inspect}"
+        @funnels = Wot::ProcessFile.load_data((params[:funnels][:file].tempfile).to_path, true)
         unless @funnels.empty?
           @data_file = Base64.encode64(params[:funnels][:file].original_filename)
         end
@@ -74,9 +75,22 @@ class FunnelsController < ApplicationController
     report.graphic_id = graph
     report.user_id = current_user.id
     if report.save
+      render :json => {status: 200, id: report.id, title_slug: report.title_slugize}
+    else
+      render :json => {status: 101, error: report.errors}
+    end
+  end
+
+  def update_report
+    graph = Graphic.where(:chart_type => params[:report][:chart_type])
+    report = Report.find(params[:report][:id])
+    params[:report][:graphic_id] = graph[0].id
+
+    if report.update_attriapp/models/report.rbbutes(params[:report])
       render :json => {status: 200}
     else
       render :json => {status: 101, error: report.errors}
+      pry.binding
     end
   end
 end

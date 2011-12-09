@@ -1,0 +1,5 @@
+%h5 Recent reports
+%ul
+	- @last_reports.each do |report|
+		%li
+			= link_to report.title, get_report_path(report.id, report.title_slugize)

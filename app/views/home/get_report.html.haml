@@ -1,0 +1,88 @@
+= content_for :head do
+	- if current_user.admin
+		= javascript_include_tag "get_report"
+	- else
+		= javascript_include_tag "get_report_user"
+%div.sidebar
+	%div.well
+		= render :partial => 'form_search_report'
+	%div.well
+		= render :partial => 'recent_reports'
+%div.content
+	- flash.each do |name, msg|
+		= show_flash name, msg
+	- if current_user.admin
+		%div#modal-save-as{class: 'modal hide fade'}
+			%div.modal-header
+				=link_to '&times;'.html_safe, '#', class: 'close'
+				%h3 Save report
+			%div.modal-body
+				%div{style:'height: 80px;display:none', id: 'report_error'}
+					%h2 Error
+				%div{style:'height: 80px;display:none', id: 'report_loading'}
+					Loading...
+				%div{style:'height: 80px', id: 'report_form'}
+					= form_for '#', {class: 'form-stacked'} do |f|
+						%div.clearfix
+							%label{for: 'title'} Title
+							%div.input
+								= text_field_tag :report_title, nil, :class => 'xInput'
+						%div.clearfix
+							%label{for: 'note'} Note
+							%div.input
+								= text_field_tag :report_note, nil, :class => 'xInput'
+			%div.modal-footer
+				=link_to 'Try again', '#', class: 'btn primary', id: 'modal_try', style: 'display:none'
+				=link_to 'Save', '#', class: 'btn primary', id: 'modal_save'
+				=link_to 'Cancel', '#', class: 'btn secondary', id: 'modal_cancel'
+		%div#modal-save{class: 'modal hide fade'}
+			%div.modal-header
+				=link_to '&times;'.html_safe, '#', class: 'close'
+				%h3 Save report
+			%div.modal-body
+				%div{style:'height: 80px;display:none', id: 'report_error_save'}
+					%h2 Error
+				%div{style:'height: 80px', id: 'report_loading_save'}
+					Loading...
+			%div.modal-footer
+				=link_to 'Try again', '#', class: 'btn primary', id: 'modal_try_save', style: 'display:none'
+	%div.page-header
+		%h2
+			Dashboard
+			%small Generate chart
+	%ul.breadcrumb
+		%li
+			%a{:href => root_path} Dashboard
+			%span.divider /
+		%li.active
+			%a{:href => "#"}= @report.title
+			= hidden_field_tag 'report_id', @report.id
+			= hidden_field_tag 'report_title_def', @report.title
+			= hidden_field_tag 'report_note_def', @report.note
+	- if current_user.admin
+		%div.row{:style => 'display:table'}
+			%div.span1 To
+			%div.span4= text_field_tag 'begin', @report.starts_date
+			%div.span1 From
+			%div.span4= text_field_tag 'end', @report.ends_date
+			%div.span4= link_to "Generate chart", "#", :class => 'btn', :id => 'generate'
+			%div.span3
+				= link_to "Save", "#", :class => 'btn', :id => 'save', :'data-controls-modal'=>"modal-save", :'data-backdrop' => "static"
+				= link_to "Save as", "#", :class => 'btn', :id => 'save_as', :'data-controls-modal'=>"modal-save-as", :'data-backdrop' => "static"
+	- else
+		= hidden_field_tag 'begin', @report.starts_date
+		= hidden_field_tag 'end', @report.ends_date
+	%div.row
+		%div.span16
+			%div{:style => "width:100%;height:320px", :id => 'chart1'}
+	%div.row
+		%div.span16
+			%div{:style => "width:100%;height:320px", :id => 'chart2'}
+	%div.row
+		%div.span16
+			%h4 Choose a graphic
+	%div.row
+		%div.span16
+			%ul.pills
+				- @graphics.each do |graph|
+					%li{:class => graph.id == @report.graphic_id ? 'active' : '' }= link_to graph.title, '#', title: graph.description, type: graph.chart_type

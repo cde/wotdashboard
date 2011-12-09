@@ -1,0 +1,33 @@
+%div.sidebar
+	%div.well
+		= render :partial => 'form_search_report'
+	%div.well
+		= render :partial => 'recent_reports'
+%div.content
+	- flash.each do |name, msg|
+		= show_flash name, msg
+	%div.page-header
+		%h2
+			Dashboard
+			%small get results
+	%ul.breadcrumb
+		%li
+			%a{:href => "#"} Results
+			%span.divider /
+		%li.active
+			= link_to @finding, "#"
+	%div.row
+		%div.span16
+			%table.zebra-striped
+				%thead
+					%tr
+						%th Title
+						%th Note
+						%th Go
+				%tbody
+					- @results.each do |report|
+						%tr
+							%td= report.title
+							%td= report.note
+							%td
+								= link_to "view", get_report_path(report.id, report.title_slugize)
