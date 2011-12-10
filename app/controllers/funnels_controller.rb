@@ -36,7 +36,6 @@ class FunnelsController < ApplicationController
         #Todo: we'll probably store this in amazon s3'
 
         dir_store = (Rails.env != 'development')?  "/data/" : "public/data/"
-        debugger
         funnels = Wot::ProcessFile.load_data(dir_store + Base64.decode64(params[:data_file]))
         if funnels
           Wot::ProcessFile.create_funnels(funnels[:ads], "Ads")

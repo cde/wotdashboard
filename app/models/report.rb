@@ -5,7 +5,7 @@ class Report < ActiveRecord::Base
 
   has_many :funnels
 
-  attr_accessible :starts_date, :ends_date, :title, :note, :data
+  attr_accessible :starts_date, :ends_date, :title, :note, :data, :graphic_id
   validates_presence_of :starts_date, :ends_date, :title
   validates_uniqueness_of :title
 
@@ -15,10 +15,6 @@ class Report < ActiveRecord::Base
   scope :direct, where(traffic_type: "Direct").order("start_date asc")
 
 
-
-  attr_accessible :starts_date, :ends_date, :title, :note, :graphic_id
-  validates_presence_of :starts_date, :ends_date, :title
-  validates_uniqueness_of :title
 
   def title_slugize(slug = '-')
     sluged = Iconv.iconv('ascii//TRANSLIT//IGNORE', 'utf-8', self.title).to_s
