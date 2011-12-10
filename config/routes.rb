@@ -1,5 +1,7 @@
 Wotdashboard::Application.routes.draw do
 
+  resources :reports
+
   match "funnels" => "funnels#index", :as => :funnels
   match "funnels/normal/:start/:end/:traffic_type" => "funnels#get_data_normal", :as => :funnels_get_data_normal
   match "funnels/adquisition/:start/:end/:traffic_type" => "funnels#get_data_adquisition", :as => :funnels_get_data_adquisition
@@ -10,7 +12,7 @@ Wotdashboard::Application.routes.draw do
   match "process/:data_file" => "funnels#process_file", :as => :funnels_process_file
 
   match ":id/:title" => "home#get_report", :as => :get_report
-  resources :reports
+
 
   devise_for :users, :controllers => {:sessions => 'devise/sessions'}, :skip => [:sessions] do
       get 'login' => 'devise/sessions#new', :as => :new_user_session
