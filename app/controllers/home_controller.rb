@@ -1,11 +1,6 @@
 class HomeController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :last_reports, :only => [:index, :get_report, :results]
-  
-  def last_reports
-    @last_reports = Report.select('id, title').order("created_at").limit(10)
-  end
-  
+
   def results
     @finding = params[:user][:title]
     @results = Report.where("title LIKE ?", "%" + params[:user][:title] + "%")

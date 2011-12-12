@@ -1,10 +1,5 @@
 = content_for :head do
 	= javascript_include_tag "home_user"
-%div.sidebar
-	%div.well
-		= render :partial => 'form_search_report'
-	%div.well
-		= render :partial => 'recent_reports'
 %div.content
 	- flash.each do |name, msg|
 		= show_flash name, msg

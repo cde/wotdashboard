@@ -85,7 +85,7 @@ class FunnelsController < ApplicationController
     report = Report.find(params[:report][:id])
     params[:report][:graphic_id] = graph[0].id
 
-    if report.update_attriapp/models/report.rbbutes(params[:report])
+    if report.update_attributes(params[:report])
       render :json => {status: 200}
     else
       render :json => {status: 101, error: report.errors}

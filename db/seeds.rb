@@ -10,7 +10,7 @@ if User.all.empty?
 end
 =end
 
-
+=begin
 if Funnel.all.empty? && Rails.env == 'development'
  start_time, end_time = nil
   (1..36).each do |i|
@@ -25,6 +25,7 @@ if Funnel.all.empty? && Rails.env == 'development'
     Funnel.create(traffic_type: 'Ads', confirmed: 5000  * i, logged_in: (5000  * i) * 0.8, first_battle: (5000  * i) * 0.6, first_upgrade: (5000  * i) * 0.4, tank_purchase: (5000  * i) * 0.2, start_date: start_time, end_date: end_time )
   end
 end
+=end
 
 if Graphic.all.empty? && Rails.env == 'development'
   Graphic.create(title: 'Adquisitions', description: 'Description #1', :chart_type => 'adquisition')

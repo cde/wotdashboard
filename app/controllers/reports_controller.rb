@@ -1,6 +1,7 @@
 require 'wot/process_file'
 class ReportsController < ApplicationController
-
+  before_filter :authenticate_user!
+  
   def index
     @reports = Report.order("created_at desc").limit(10)
 

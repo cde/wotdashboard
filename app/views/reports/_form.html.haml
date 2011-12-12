@@ -8,11 +8,11 @@
   %div.row
     %fieldset
       = f.label :title
-      = f.text_field :title
+      = f.text_field :title, :class => 'span7'
   %div.row
     %fieldset
       = f.label :note
-      = f.text_area :note
+      = f.text_area :note, :class => 'span7'
   -if @report.new_record?
     %div.row
       %div.span12
