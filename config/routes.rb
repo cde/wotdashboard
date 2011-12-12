@@ -11,8 +11,7 @@ Wotdashboard::Application.routes.draw do
   match "preview" => "funnels#preview", :as => :funnels_preview
   match "process/:data_file" => "funnels#process_file", :as => :funnels_process_file
 
-  match ":id/:title" => "home#get_report", :as => :get_report, :constraints => {:id => /[0-9]+/}
-  resources :reports
+  match ":id/:title" => "home#get_report", :as => :get_report
 
   devise_for :users, :controllers => {:sessions => 'devise/sessions'}, :skip => [:sessions] do
       get 'login' => 'devise/sessions#new', :as => :new_user_session
