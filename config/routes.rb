@@ -1,6 +1,5 @@
 Wotdashboard::Application.routes.draw do
   
-  root :to => 'home#index'
   match "funnels" => "funnels#index", :as => :funnels
   match "funnels/normal/:start/:end/:traffic_type" => "funnels#get_data_normal", :as => :funnels_get_data_normal
   match "funnels/adquisition/:start/:end/:traffic_type" => "funnels#get_data_adquisition", :as => :funnels_get_data_adquisition
@@ -69,6 +68,7 @@ Wotdashboard::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   
+  root :to => 'home#index'
 
   # See how all your routes lay out with "rake routes"
 
