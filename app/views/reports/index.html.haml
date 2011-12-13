@@ -10,7 +10,7 @@
 				%th Ends date
 				%th Title
 				%th Note
-				%th Filename
+				-#%th Filename
 				%th
 				%th
 				%th
@@ -21,7 +21,7 @@
 					%td= report.ends_date
 					%td= report.title
 					%td= report.note
-					%td= report.data
+					-#%td=# report.data
 					%td= link_to 'Show', report, class: 'btn secondary'
 					%td= link_to 'Edit', edit_report_path(report), class: 'btn secondary'
 					%td= link_to 'Destroy', report, class: 'btn danger', :confirm => 'Are you sure?', :method => :delete
