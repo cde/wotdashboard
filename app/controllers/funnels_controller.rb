@@ -55,24 +55,16 @@ class FunnelsController < ApplicationController
   end
 
   def get_data_normal
-    begin
-      @funnel_data = Funnel.select("id, traffic_type, confirmed, logged_in, first_battle, first_upgrade, tank_purchase, start_date").where(:start_date => (params[:start].to_date)..(params[:end].to_date), :traffic_type => params[:traffic_type])
-      respond_to do |format|
-        format.json { render :json => @funnel_data }
-      end
-    rescue 
-      render :json => {}
+    @funnel_data = Funnel.select("id, traffic_type, confirmed, logged_in, first_battle, first_upgrade, tank_purchase, start_date").where(:start_date => (params[:start].to_date)..(params[:end].to_date), :traffic_type => params[:traffic_type])
+    respond_to do |format|
+      format.json { render :json => @funnel_data }
     end
   end
 
   def get_data_adquisition
-    begin
-      @funnel_data = Funnel.select("sum(traffic_type) traffic_type, sum(confirmed) confirmed, sum(logged_in) logged_in, sum(first_battle) first_battle, sum(first_upgrade) first_upgrade, sum(tank_purchase) tank_purchase").where(:start_date => (params[:start].to_date)..(params[:end].to_date), :traffic_type => params[:traffic_type])
-      respond_to do |format|
-        format.json { render :json => @funnel_data }
-      end
-    rescue 
-      render :json => {}
+    @funnel_data = Funnel.select("id, sum(traffic_type) traffic_type, sum(confirmed) confirmed, sum(logged_in) logged_in, sum(first_battle) first_battle, sum(first_upgrade) first_upgrade, sum(tank_purchase) tank_purchase").where(:start_date => (params[:start].to_date)..(params[:end].to_date), :traffic_type => params[:traffic_type]).group('id')
+    respond_to do |format|
+      format.json { render :json => @funnel_data }
     end
   end
 
