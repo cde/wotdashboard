@@ -9,7 +9,7 @@
             %li{:class => check_item_active(request.url, '')}= link_to 'Home', root_path
             - if current_user.admin
               %li{:class => check_item_active(request.url, 'reports')}= link_to 'Reports', reports_path
-              %li{:class => check_item_active(request.url, 'funnels')}= link_to 'Add files', funnels_path
+              -#%li{:class => check_item_active(request.url, 'funnels')}=# link_to 'Add files', funnels_path
         %nav
           %ul{:class => 'nav secondary-nav'}
             %li{:class => 'dropdown'}

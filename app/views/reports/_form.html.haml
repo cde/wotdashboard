@@ -8,11 +8,18 @@
   %div.row
     %fieldset
       = f.label :title
-      = f.text_field :title, :class => 'span7'
+      .input
+        = f.text_field :title, :class => 'span9'
+        %span.help-block
+          %strong Note:
+          By default will be "Generated report from date1(dd/mm) to date2(dd/mm)"
   %div.row
     %fieldset
       = f.label :note
-      = f.text_area :note, :class => 'span7'
+      .input
+        = f.text_area :note, :class => 'span9'
+        %span.help-block
+          Add here any additional note
   -if @report.new_record?
     %div.row
       %div.span12
