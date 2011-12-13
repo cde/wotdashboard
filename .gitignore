@@ -2,6 +2,7 @@
 app/assets/.DS_Store
 .bundle
 db/*.sqlite3
+public/assets/
 log/*.log
 tmp/
 .sass-cache/
