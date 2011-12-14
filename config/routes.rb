@@ -13,7 +13,6 @@ Wotdashboard::Application.routes.draw do
 
   match ":id/:title" => "home#get_report", :as => :get_report, :constraints => {:id => /[0-9]+/}
 
-
   devise_for :users, :controllers => {:sessions => 'devise/sessions'}, :skip => [:sessions] do
       get 'login' => 'devise/sessions#new', :as => :new_user_session
       post 'login' => 'devise/sessions#create', :as => :user_session
