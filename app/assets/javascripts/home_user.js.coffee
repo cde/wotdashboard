@@ -6,18 +6,15 @@
 #= require ./datejs/datejs.min
 #= require ./graphics
 
-$( ->
+$ ->
 	get_data = ->
-		today = Date.today().addWeeks(-1)
-		friday = Date.today()
-		console.log today
-		for	index in [1..4]
-			begin = today.previous().monday()
-			end = friday.previous().friday()
-			new Wot.Graph('chart'+ ((index * 2) - 1), 'adquisition', 'direct', begin.toString("yyyy-M-dd"), end.toString("yyyy-M-dd"))
-			new Wot.Graph('chart'+ (index * 2), 'adquisition', 'ads', begin.toString("yyyy-M-dd"), end.toString("yyyy-M-dd"))
-		
+		$.get '/funnels/get_dates', (data)->
+			index = 1
+			for	temp_date in data.dates
+				new Wot.Graph('chart'+ ((index * 2) - 1), 'adquisition', 'direct', temp_date.starts, temp_date.ends)
+				new Wot.Graph('chart'+ (index * 2), 'adquisition', 'ads', temp_date.starts, temp_date.ends)
+				index++
+			$("#slides").slides
+				play: 5000
 	get_data()
-	$("#slides").slides
-		play: 5000
-)
+	
