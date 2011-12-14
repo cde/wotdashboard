@@ -20,9 +20,9 @@
         %p
           %b Note:
           = @report.note
-        %p
-          %b Filename:
-          = @report.data
+        -#%p
+        -#  %b Filename:
+        -#  =# @report.data
       %fieldset
         = render :partial=> 'funnels', :locals => {:funnels => @direct_funnels, :title => 'Direct Traffic'}
         = render :partial=> 'funnels', :locals => {:funnels => @ads_funnels, :title => 'With Promo Actions/Ads'}

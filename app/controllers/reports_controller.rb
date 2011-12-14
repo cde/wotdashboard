@@ -1,7 +1,7 @@
 require 'wot/process_file'
 class ReportsController < ApplicationController
   before_filter :authenticate_user!
-  
+
   def index
     @reports = Report.order("created_at desc").limit(10)
 
@@ -42,7 +42,6 @@ class ReportsController < ApplicationController
 
   def create
     @report = Report.new(params[:report])
-    debugger
     if params[:report] && params[:report][:data] &&
        (params[:report][:starts_date].nil? || params[:report][:ends_date].nil?)
 

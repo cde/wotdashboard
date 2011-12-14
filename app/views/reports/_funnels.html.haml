@@ -10,9 +10,10 @@
             %th First Upgrade
             %th Tank Purchase
     %tbody
-        - funnels[0...funnels.size - 1].each do |funnel|
+        - funnels.each do |funnel|
             %tr
-                %td.week=# funnel[:week]
+                %td.week
+                    ="#{funnel.start_date.strftime("%m %b")} - #{funnel.end_date.strftime("%m %b")} "
                 %td= number_with_delimiter(funnel.confirmed)
                 %td= number_with_delimiter(funnel.logged_in)
                 %td= number_with_delimiter(funnel.first_battle)
@@ -21,8 +22,8 @@
     %tfoot
         %tr
             %td.totals Totals
-            %td=#number_with_delimiter(totals[:confirmed])
-            %td=#number_with_delimiter(totals[:logged_in])
-            %td=#number_with_delimiter(totals[:first_battle])
-            %td=#number_with_delimiter(totals[:first_upgrade])
-            %td=#number_with_delimiter(totals[:tank_purchase])
+            %td=number_with_delimiter(funnels.sum(:confirmed))
+            %td=number_with_delimiter(funnels.sum(:logged_in))
+            %td=number_with_delimiter(funnels.sum(:first_battle))
+            %td=number_with_delimiter(funnels.sum(:first_upgrade))
+            %td=number_with_delimiter(funnels.sum(:tank_purchase))

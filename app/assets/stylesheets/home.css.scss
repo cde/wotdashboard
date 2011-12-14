@@ -1,3 +1,10 @@
+@import "global";
+
+.sidebar{
+     @include btn_medium_base;
+}
+
+
 .topbar2{
     position:relative;
     height: 138px;

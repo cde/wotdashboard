@@ -37,9 +37,12 @@ class Wot.Graph
 			categories: []
 			series: [ {name: 'Positive', data: []},
 								{name: 'Negative', data: []} ]
-
-		parameters.series[0].data = [data[0].confirmed, data[0].logged_in, data[0].first_battle, data[0].first_upgrade, data[0].tank_purchase]
-		parameters.series[1].data = [ '', (data[0].confirmed - data[0].logged_in) * -1, (data[0].confirmed - data[0].first_battle) * -1, (data[0].confirmed - data[0].first_upgrade) * -1, (data[0].confirmed - data[0].tank_purchase) * -1]
+		if data.length == 0
+			parameters.series[0].data = []
+			parameters.series[1].data = []
+		else
+			parameters.series[0].data = [data[0].confirmed, data[0].logged_in, data[0].first_battle, data[0].first_upgrade, data[0].tank_purchase]
+			parameters.series[1].data = [ '', (data[0].confirmed - data[0].logged_in) * -1, (data[0].confirmed - data[0].first_battle) * -1, (data[0].confirmed - data[0].first_upgrade) * -1, (data[0].confirmed - data[0].tank_purchase) * -1]
 
 		parameters.categories = ['Confirmed', 'Login', 'First Battle', 'First Upgrade', 'First Tank Purchase']
 

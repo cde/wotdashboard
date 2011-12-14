@@ -62,7 +62,7 @@ class FunnelsController < ApplicationController
   end
 
   def get_data_adquisition
-    @funnel_data = Funnel.select("sum(traffic_type) traffic_type, sum(confirmed) confirmed, sum(logged_in) logged_in, sum(first_battle) first_battle, sum(first_upgrade) first_upgrade, sum(tank_purchase) tank_purchase").where(:start_date => (params[:start].to_date)..(params[:end].to_date), :traffic_type => params[:traffic_type])
+    @funnel_data = Funnel.select("traffic_type, sum(confirmed) AS confirmed, sum(logged_in) AS logged_in, sum(first_battle) AS first_battle, sum(first_upgrade) AS first_upgrade, sum(tank_purchase) AS tank_purchase").where(:start_date => (params[:start].to_date)..(params[:end].to_date), :traffic_type => params[:traffic_type]).group('traffic_type')
     respond_to do |format|
       format.json { render :json => @funnel_data }
     end
