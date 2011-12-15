@@ -182,11 +182,12 @@ class Wot.Graph
 				enabled: false
 		, (chart)->
 			for index in [0..chart.series[0].data.length - 1]
-				if index > 0 && chart.series[0].data[index + 1] != undefined && chart.series[0].data[index].config != null
+				if index >= 0 && chart.series[0].data[index + 1] != undefined && chart.series[0].data[index].config != null
 					aux_label = Math.round((parseFloat(chart.series[0].data[index + 1].config) * 100) / parseFloat(chart.series[0].data[index].config))
 					myClass.create_label_graph chart, aux_label.toString() + "%", {y: chart.series[0].data[index].barH + chart.series[0].data[index].barY + chart.plotTop - 15, x: chart.series[0].data[index + 1].plotX + chart.plotLeft - 75, color: 'green'}
-					aux_label2 = 100 - aux_label
-					myClass.create_label_graph chart, aux_label2.toString() + "%", {y: chart.series[1].data[index].barY + chart.plotTop + 25, x: chart.series[0].data[index + 1].plotX + chart.plotLeft - 75, color: 'red'}
+					if index > 0
+						aux_label2 = 100 - aux_label
+						myClass.create_label_graph chart, aux_label2.toString() + "%", {y: chart.series[1].data[index].barY + chart.plotTop + 25, x: chart.series[0].data[index + 1].plotX + chart.plotLeft - 75, color: 'red'}
 				if index > 0 && chart.series[0].data[index].config != null
 					aux_label = Math.round((parseFloat(chart.series[0].data[index].config) * 100) / parseFloat(chart.series[0].data[0].config))
 					myClass.create_label_graph chart, aux_label.toString() + "%", {y: chart.series[0].data[index].plotY + chart.plotTop - 15, x: chart.series[0].data[index].plotX + chart.plotLeft - 10, color: 'gray'}
