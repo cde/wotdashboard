@@ -67,6 +67,22 @@ class FunnelsController < ApplicationController
       format.json { render :json => @funnel_data }
     end
   end
+  
+  def get_dates
+    last_date = Funnel.select("start_date").order('start_date DESC').limit(1)
+    if last_date.length == 1
+      week_dates = []
+      last_date[0].start_date.downto(last_date[0].start_date << 2) do |temp_date|
+        if temp_date.saturday? && week_dates.length < 4
+          week_dates << {starts: temp_date - 6, ends: temp_date}
+        end
+      end
+      render :json => {dates: week_dates}
+    else
+      render :json => {last_date: 0}
+    end
+    
+  end
 
   def save_report
     graph = Graphic.where(:chart_type => params[:report][:chart_type])

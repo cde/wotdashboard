@@ -53,9 +53,21 @@ class Wot.Graph
 		else
 		  this.generate_graph_normal(parameters, this.container, this.type_data, this.type_graphic)
 	create_label_graph: (chart, text, options)->
-		text = chart.renderer.text(text, options.x, options.y).attr({zIndex: 6}).css({color: options.color}).add()
-		box = text.getBBox()
-		chart.renderer.rect(box.x - 5, box.y - 5, box.width + 10, box.height + 10, 5).attr({fill: '#FFF', stroke: 'gray', 'stroke-width': 1, zIndex: 4}).add()
+		textbox = chart.renderer.text(text, options.x, options.y).attr({zIndex: 6}).css({color: options.color}).add()
+		box = textbox.getBBox()
+		if box.width == 0
+			width = 39
+			if text.length == 2
+			  width = 30
+			else if text.length == 3
+				width = 33
+			else if text.length == 4
+				width = 36
+			console.log width
+			chart.renderer.rect(options.x - 2, options.y - 17, width, 25, 5).attr({fill: '#FFF', stroke: 'gray', 'stroke-width': 1, zIndex: 4}).add()
+		else
+			chart.renderer.rect(box.x - 5, box.y - 5, box.width + 10, box.height + 10, 5).attr({fill: '#FFF', stroke: 'gray', 'stroke-width': 1, zIndex: 4}).add()
+		
 	generate_graph_normal: (parameters, container, title, type_graphic)->
 		myClass = this
 		title = title + "  (" + this.date_from + " to " + this.date_to + ")"
