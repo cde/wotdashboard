@@ -3,7 +3,6 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 #= require ./graphic/highcharts
 #= require ./slides/slides.min.jquery
-#= require ./datejs/datejs.min
 #= require ./graphics
 
 $ ->
