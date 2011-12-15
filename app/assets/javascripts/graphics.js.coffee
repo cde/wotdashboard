@@ -80,6 +80,8 @@ class Wot.Graph
 					dataLabels:
 						enabled: true
 						color: 'white'
+						formatter: ->
+							return Highcharts.numberFormat(this.y, 0, ',')
 			stack_labels:
 				enabled: true
 				style:
@@ -106,7 +108,7 @@ class Wot.Graph
 				stackLabels: stack_labels
 			tooltip:
 				formatter: ()->
-					'<b>'+ this.series.name + '</b><br/>' + this.x + ': ' + this.y
+					'<b>'+ this.series.name + '</b><br/>' + this.x + ': ' + Highcharts.numberFormat(this.y, 0, ',')
 			plotOptions: plot_options
 			legend:
 				layout: 'vertical'
@@ -136,6 +138,8 @@ class Wot.Graph
 					dataLabels:
 						enabled: true
 						color: 'white'
+						formatter: ->
+							return Highcharts.numberFormat(this.y, 0, ',')
 			stack_labels:
 				enabled: true
 				style:
@@ -162,7 +166,7 @@ class Wot.Graph
 				stackLabels: stack_labels
 			tooltip:
 				formatter: ()->
-					'<b>'+ this.series.name + '</b><br/>' + this.x + ': ' + this.y
+					'<b>'+ this.series.name + '</b><br/>' + this.x + ': ' + Highcharts.numberFormat(this.y, 0, ',')
 			plotOptions: plot_options
 			legend:
 				layout: 'vertical'
