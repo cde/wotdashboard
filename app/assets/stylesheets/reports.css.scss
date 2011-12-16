@@ -2,16 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 /*@import "utils/buttons";*/
-
-@mixin btn_medium_base {
-    .btn.primary{
-            background-color:  #CF8F00;
-            border-color: #CF8F00 #CF8F00 #C3F00;
-            background-image: -moz-linear-gradient(center top , #F7D9A7, #CF8F00);
-            background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #CF8F00));
-
-        }
-}
+@import "global.css";
 
 .reports{
     .help-block{
@@ -23,9 +14,5 @@
     }
     label{
         margin-right:20px;
-    }
-
-    .content{
-        @include btn_medium_base;
     }
 }
