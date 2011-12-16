@@ -13,7 +13,7 @@
         - funnels.each do |funnel|
             %tr
                 %td.week
-                    ="#{funnel.start_date.strftime("%m %b")} - #{funnel.end_date.strftime("%m %b")} "
+                    ="#{funnel.start_date.strftime("%e %b")} - #{funnel.end_date.strftime("%e %b")} "
                 %td= number_with_delimiter(funnel.confirmed)
                 %td= number_with_delimiter(funnel.logged_in)
                 %td= number_with_delimiter(funnel.first_battle)
